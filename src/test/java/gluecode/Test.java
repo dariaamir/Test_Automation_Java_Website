@@ -3,15 +3,15 @@ import java.util.concurrent.TimeUnit;
 
 
 import framework.pageobjects.HomePage;
-import org.openqa.selenium.By;
+import framework.pageobjects.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.java.Before;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.en.And;
 import org.junit.Assert;
 
 public class Test {
@@ -40,43 +40,25 @@ public class Test {
         homePage.signInLink.click();
     }
 
-    @When("^user enters username and password$")
-    public void user_enters_username_and_password() throws Throwable {
-        driver.findElement(By.id("email")).sendKeys("blog.cucumber@gmail.com");
-        driver.findElement(By.id("passwd")).sendKeys("Cucumber@blog");
-        driver.findElement(By.id("SubmitLogin")).click();
-    }
-    @When("^user enters wrong email")
-    public void user_enters_wrong_email() throws Throwable {
-        driver.findElement(By.id("email")).sendKeys("12334qwer");
-        driver.findElement(By.id("passwd")).sendKeys("Cucumber@blog");
-        driver.findElement(By.id("SubmitLogin")).click();
+    @When("^user enters (.*) as username and (.*) as password")
+    public void user_enters_username_and_password(String username, String password) throws Throwable {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterLoginAndPassword(username, password);
     }
 
-    @When("^user enters wrong password")
-    public void user_enters_wrong_password() throws Throwable {
-        driver.findElement(By.id("email")).sendKeys("blog.cucumber@gmail.com");
-        driver.findElement(By.id("passwd")).sendKeys("wrong.cucumber@blog");
-        driver.findElement(By.id("SubmitLogin")).click();
+    @Then("^(.*) as success message is displayed$")
+    public void success_message_is_displayed(String message) throws Throwable {
+        LoginPage loginPage = new LoginPage(driver);
+        Assert.assertEquals(message, loginPage.getSuccessLoginMessage());
     }
 
-    @Then("^success message is displayed$")
-    public void success_message_is_displayed() throws Throwable {
-        String exp_message = "Welcome to your account. Here you can manage all of your personal information and orders.";
-        String actual = driver.findElement(By.cssSelector(".info-account")).getText();
-        Assert.assertEquals(exp_message, actual);
-    }
-    @Then("^wrong email message is displayed$")
-    public void wrong_email_message_is_displayed() throws Throwable {
-        String exp_message = "Invalid email address.";
-        String actual = driver.findElement(By.cssSelector(".alert-danger ol")).getText();
-        Assert.assertEquals(exp_message, actual);
+    @Then("^(.*) as error message is displayed$")
+    public void error_message_is_displayed(String message) throws Throwable {
+        LoginPage loginPage = new LoginPage(driver);
+        Assert.assertEquals(message, loginPage.getErrorLoginMessage());
     }
 
-    @Then("^wrong password message is displayed$")
-    public void wrong_password_message_is_displayed() throws Throwable {
-        String exp_message = "Authentication failed.";
-        String actual = driver.findElement(By.cssSelector(".alert-danger ol")).getText();
-        Assert.assertEquals(exp_message, actual);
+    @And("^user is redirected to the account page$")
+    public void pass_this() throws Throwable {
     }
 }
