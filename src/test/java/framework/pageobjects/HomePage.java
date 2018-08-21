@@ -12,6 +12,9 @@ public class HomePage {
     @FindBy(className = "login")
     public WebElement signInLink;
 
+    @FindBy(className = "search_query")
+    public WebElement searchInputField;
+
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }

@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import framework.pageobjects.HomePage;
 import framework.pageobjects.LoginPage;
+import framework.pageobjects.SearchPage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import cucumber.api.java.Before;
@@ -28,7 +30,7 @@ public class Test {
 
     @Given("^user is on homepage$")
     public void user_is_on_homepage() throws Throwable {
-        System.setProperty("webdriver.chrome.driver","C:\\Program Files\\chormedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chormedriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://automationpractice.com/index.php");
@@ -60,5 +62,29 @@ public class Test {
 
     @And("^user is redirected to the account page$")
     public void pass_this() throws Throwable {
+    }
+
+    @When("^user enters (.*) as search_string in the search field$")
+    public void user_enters_esarch_string(String search_string) throws Throwable {
+        HomePage homePage = new HomePage(driver);
+        homePage.searchInputField.sendKeys(search_string);
+    }
+
+    @When("^user clicks enter$")
+    public void user_clicks_enter() throws Throwable {
+        HomePage homePage = new HomePage(driver);
+        homePage.searchInputField.sendKeys(Keys.ENTER);
+    }
+
+    @Then("^user is redirected to the search result page$")
+    public void user_is_redirected_to_the_search_result_page() throws Throwable {
+        Assert.assertEquals(driver.getTitle(), "Search - My Store");
+    }
+
+    @Then("^(.*) is displayed at the top$")
+    public void search_string_displayed_at_the_search_page(String search_string) throws Throwable {
+        SearchPage searchPage = new SearchPage(driver);
+        String pageTitle = searchPage.pageTitle.getText();
+        Assert.assertTrue(pageTitle.contains(search_string.toUpperCase()));
     }
 }
