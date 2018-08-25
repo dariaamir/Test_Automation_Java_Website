@@ -10,7 +10,22 @@ public class SearchPage {
     private WebDriver driver;
 
     @FindBy(className = "page-heading")
-    public WebElement pageTitle;
+    private WebElement pageTitle;
+
+    public String getPageTitle(){
+        return this.pageTitle.getText();
+    }
+
+    @FindBy(className = "product-name")
+    public WebElement productContainer;
+
+    public String getProductContainerTitle(){
+        WebElement productContainer = this.productContainer;
+        String title = productContainer.getAttribute("title");
+        return title;
+    }
+
+
 
     public SearchPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
