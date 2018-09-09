@@ -1,9 +1,14 @@
 package framework.pageobjects;
 
+import cucumber.api.java.fr.Soit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SearchPage {
@@ -13,21 +18,30 @@ public class SearchPage {
     private WebElement pageTitle;
 
     public String getPageTitle(){
-        return this.pageTitle.getText();
+        return pageTitle.getText();
     }
 
-    @FindBy(className = "product-name")
-    public WebElement productContainer;
+    @FindBy(css = ".product-container .product-name")
+    private List<WebElement> allProductContainres;
 
-    public String getProductContainerTitle(){
-        WebElement productContainer = this.productContainer;
-        String title = productContainer.getAttribute("title");
-        return title;
+    public String[] getAllProductContainersTitles(){
+        int listSize = allProductContainres.size();
+        String[] allProductsTitles = new String[listSize];
+        for (int i = 0; i< listSize; i++){
+            allProductsTitles[i] = allProductContainres.get( i ).getAttribute("title");
+        }
+        return allProductsTitles;
     }
 
+    @FindBy(className = "alert-warning")
+    private WebElement errorMessage;
 
+    public String geterrorMessageText(){
+        return errorMessage.getText();
+    }
 
     public SearchPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 }

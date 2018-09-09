@@ -1,7 +1,10 @@
 package gluecode;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
 import framework.pageobjects.HomePage;
 import framework.pageobjects.LoginPage;
+import framework.pageobjects.MyAccountPage;
 import framework.pageobjects.SearchPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +21,9 @@ public class StepDefinitions {
 
     @Before
     public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "src\\webdrivers\\chromedriver.exe");
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver = new ChromeDriver();
     }
 
     @After
@@ -25,21 +31,32 @@ public class StepDefinitions {
         driver.quit();
     }
 
-    @Given("^user is on homepage$")
-    public void user_is_on_homepage(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chormedriver\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://automationpractice.com/index.php");
-    }
-
-    @When("^user navigates to Login Page$")
-    public void user_navigates_to_Login_Page() {
+    @Given("^user is on Home Page$")
+    public void user_is_on_home_page(){
         HomePage homePage = new HomePage(driver);
-        homePage.signInLink.click();
+        homePage.openHomePage();
     }
 
-    @When("^user enters (.*) as username and (.*) as password")
+    @Given("^user is on Login Page$")
+    public void user_is_on_login_page(){
+        LoginPage loginPage = new LoginPage(driver);
+        driver.get( loginPage.loginPageURL );
+    }
+
+    @When("^user opens the Login Page link$")
+    public void user_opens_the_Login_Page_link() {
+        HomePage homePage = new HomePage(driver);
+        homePage.clickSignInLink();
+    }
+
+    @Then("^user is redirected to the Login page$")
+    public void login_page_is_opened() {
+        LoginPage loginPage = new LoginPage(driver);
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, loginPage.getDefaultLoginPageURL());
+    }
+
+    @When("^user enters (.*) as username and (.*) as password$")
     public void user_enters_username_and_password(String username, String password) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterLoginAndPassword(username, password);
@@ -51,25 +68,23 @@ public class StepDefinitions {
         Assert.assertEquals(message, loginPage.getSuccessLoginMessage());
     }
 
-    @Then("^(.*) as error message is displayed$")
+    @Then("^(.*) as login page error message is displayed$")
     public void error_message_is_displayed(String message) {
         LoginPage loginPage = new LoginPage(driver);
         Assert.assertEquals(message, loginPage.getErrorLoginMessage());
     }
 
     @Then("^user is redirected to the account page$")
-    public void pass_this() throws Throwable {
+    public void account_page_is_opened() {
+        MyAccountPage myAccountPage = new MyAccountPage(driver);
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, myAccountPage.getDefaultMyAccountPageURL());
     }
 
-    @When("^user enters (.*) as search_string in the search field$")
+    @When("^user enters (.*) as search_string in the search field and clicks enter$")
     public void user_enters_esarch_string(String search_string) {
         HomePage homePage = new HomePage(driver);
         homePage.searchInputField.sendKeys(search_string);
-    }
-
-    @When("^user clicks enter$")
-    public void user_clicks_enter() {
-        HomePage homePage = new HomePage(driver);
         homePage.searchInputField.sendKeys(Keys.ENTER);
     }
 
@@ -91,11 +106,24 @@ public class StepDefinitions {
         String pageTitle = searchPage.getPageTitle();
         Assert.assertTrue(pageTitle.contains(search_result));
     }
-    @Then("^ (.*)as search item is displayed$")
-    public void search_item_is_displayed(String search_element){
+
+    @Then("^(.*) as search item is displayed in the results$")
+    public void search_item_is_displayed(String test_search_item){
         SearchPage searchPage = new SearchPage(driver);
-        String title = searchPage.getProductContainerTitle();
-        Assert.assertEquals(title, search_element);
+        String[] allProductsTitles = searchPage.getAllProductContainersTitles();
+        Assert.assertTrue( Arrays.asList(allProductsTitles).contains(test_search_item));
     }
 
+    @Then("^(.*) as search page error message is displayed$")
+    public void zero_results_error_message_is_displayed(String zero_results_error_message){
+        SearchPage searchPage = new SearchPage(driver);
+        String current_error_message = searchPage.geterrorMessageText();
+        Assert.assertEquals(current_error_message, zero_results_error_message);
+    }
+
+    @When( "^user opens (.*) as category page$" )
+    public void user_opens_category_page(String categoryTitle){
+        HomePage homePage = new HomePage(driver);
+        homePage.openCategoryMenuLink( categoryTitle );
+    }
 }

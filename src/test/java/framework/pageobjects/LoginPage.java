@@ -9,7 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     private WebDriver driver;
 
-    // locators
+    public String loginPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+
+    public String getDefaultLoginPageURL(){
+        return this.loginPageURL;
+    }
+
+
     @FindBy(id = "email")
     private WebElement emailInputField;
 
@@ -25,7 +31,6 @@ public class LoginPage {
     @FindBy(css = ".alert-danger ol")
     private WebElement loginErrorMessageText;
 
-    // methods
     public void enterLoginAndPassword(String username, String password){
         this.emailInputField.sendKeys(username);
         this.passwordInputField.sendKeys(password);
@@ -42,6 +47,8 @@ public class LoginPage {
 
     // init
     public LoginPage(WebDriver driver) {
+
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 }
