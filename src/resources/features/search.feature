@@ -3,7 +3,7 @@ Feature: Search Scenario
   - User receives proper message if search returns no results
 
   Background:
-  When user is on Home Page
+    Given user is on Home Page
 
   Scenario Outline: Search from the main page
     When user enters <search_string> as search_string in the search field and clicks enter

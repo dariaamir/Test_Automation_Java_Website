@@ -14,6 +14,7 @@ public class MyAccountPage {
     }
 
     public MyAccountPage(WebDriver driver) {
-        PageFactory.initElements(this.driver = driver, this);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }

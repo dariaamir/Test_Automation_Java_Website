@@ -15,6 +15,9 @@ public class LoginPage {
         return this.loginPageURL;
     }
 
+    public void openLoginPage(){
+        driver.get( loginPageURL );
+    }
 
     @FindBy(id = "email")
     private WebElement emailInputField;

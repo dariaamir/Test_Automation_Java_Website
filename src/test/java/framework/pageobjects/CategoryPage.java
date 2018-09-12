@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 
 public class CategoryPage {
     private WebDriver driver;
@@ -21,8 +23,8 @@ public class CategoryPage {
     @FindBy(css = ".subcategory-name[title=\"Casual Dresses\"]")
     private WebElement subcategoryCasualDresseslink;
 
-    public void openSubbategoryLink(String categoryTitle){
-        switch (categoryTitle) {
+    public void openSubbategoryLink(String subcategoryTitle){
+        switch (subcategoryTitle) {
             case "Tops":
                 subcategoryTopslink.click();
             case "Casual Dresses":
@@ -30,7 +32,21 @@ public class CategoryPage {
         }
     }
 
+    @FindBy(css = ".product-container .product-name")
+    private List<WebElement> allProductContainres;
+
+    public String[] getAllCatalogueItems(){
+        int listSize = allProductContainres.size();
+        String[] allCatalogueItems = new String[listSize];
+        for (int i = 0; i< listSize; i++){
+            allCatalogueItems[i] = allProductContainres.get( i ).getAttribute("title");
+        }
+        return allCatalogueItems;
+    }
+
+
     public CategoryPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }

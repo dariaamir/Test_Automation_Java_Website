@@ -1,18 +1,18 @@
 Feature: Catalogue
    User is able to browse the catalogue
 
-  Scenario Outline: Browse <category> and <subcategory>
-    Given user is on homepage
+  Scenario Outline: Browse category and subcategory
+    Given user is on Home Page
     When user opens <category> as category page
     And user opens <subcategory> as subcategory page
-    Then user is able to see <test_catalogue_item>
+    Then user is able to see <test_catalogue_item> as item in the catalogue
 
     Examples:
       |category |subcategory    |test_catalogue_item        |
       |Woman    |Tops           |Faded Short Sleeve T-shirts|
       |Dresses  |Casual Dresses |Printed Dress              |
 
-  Scenario Outline: Hover on <category>
+  Scenario Outline: Hover on category
     Given user is on homepage
     When user hovers over the <category> menu item
     Then user is able to see <subcategory>

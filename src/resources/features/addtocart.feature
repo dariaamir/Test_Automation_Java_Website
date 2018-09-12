@@ -5,14 +5,29 @@ Feature: addToCart
   - from catalogue page
 
   Background:
-    Given user is on homepage
+    Given user is logged in
 
-  Scenario Outline: Login with <username> and <password>
-    When user navigates to Login Page
-    And user enters <username> as username and <password> as password
-    Then <message> as success message is displayed
-    And user is redirected to the account page
+  Scenario: Add item to the cart from the main page
+    When user is on Home Page
+    And user click on the first add_to_cart button
+    Then confirmation pop-up is displayed
+
+  Scenario Outline: Add item to the cart from quick view
+    Given user is on Home Page
+    When
+    Then
+
 
     Examples:
-      |username|password|message|
-      |blog.cucumber@gmail.com|Cucumber@blog|Welcome to your account. Here you can manage all of your personal information and orders.|
+      | | |
+      | | |
+
+  Scenario Outline: Add item to the cart from catalogue page
+    Given user is on Home Page
+    When
+    Then
+
+
+    Examples:
+      | | |
+      | | |
