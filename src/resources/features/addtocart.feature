@@ -14,8 +14,7 @@ Feature: addToCart
 
   Scenario Outline: Add item to the cart from quick view
     Given user is on Home Page
-    When
-    Then
+
 
 
     Examples:

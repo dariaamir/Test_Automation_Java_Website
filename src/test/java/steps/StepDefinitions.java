@@ -1,13 +1,12 @@
-package gluecode;
+package steps;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import cucumber.api.java.ru.Если;
-import framework.pageobjects.HomePage;
-import framework.pageobjects.LoginPage;
-import framework.pageobjects.MyAccountPage;
-import framework.pageobjects.SearchPage;
-import framework.pageobjects.CategoryPage;
+import pageobjects.HomePage;
+import pageobjects.LoginPage;
+import pageobjects.MyAccountPage;
+import pageobjects.SearchPage;
+import pageobjects.CategoryPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
