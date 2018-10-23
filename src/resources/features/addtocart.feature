@@ -1,7 +1,6 @@
 Feature: addToCart
   User is able to add item to cart
   - from the main page
-  - from quick view
   - from catalogue page
 
   Background:
@@ -12,21 +11,7 @@ Feature: addToCart
     And user click on the first add_to_cart button
     Then confirmation pop-up is displayed
 
-  Scenario Outline: Add item to the cart from quick view
-    Given user is on Home Page
-
-
-
-    Examples:
-      | | |
-      | | |
-
-  Scenario Outline: Add item to the cart from catalogue page
-    Given user is on Home Page
-    When
-    Then
-
-
-    Examples:
-      | | |
-      | | |
+  Scenario: Add item to the cart from item page
+    When user is on item page
+    And user clicks add_to_cart button at the pop-up
+    Then confirmation pop-up is displayed

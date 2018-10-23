@@ -1,5 +1,7 @@
 package pageobjects;
 
+import cucumber.api.java.cs.Ale;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
@@ -9,7 +11,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class HomePage {
-    private WebDriver driver;
+    public static WebDriver driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
     public String homePageURL = "http://automationpractice.com/index.php";
 
@@ -42,11 +49,29 @@ public class HomePage {
         }
     }
 
-    @FindBy(className = "ajax_add_to_cart_button ")
+    @FindBy(className = "ajax_add_to_cart_button")
     private WebElement addToCartButton;
 
     public void clickAddToCartButton(){
         this.addToCartButton.click();
+    }
+
+    @FindBy(id = "Product")
+    private WebElement popUp;
+
+    @FindBy(name = "Submit")
+    private WebElement popUpAddToCartButton;
+
+    public void clickPopUpAddToCartButton(){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        this.popUpAddToCartButton.click();
+    }
+
+    @FindBy(className = "icon-eye-open")
+    private WebElement eyeButton;
+
+    public void clickEyeButton(){
+        this.eyeButton.click();
     }
 
     @FindBy(id = "layer_cart")
@@ -63,10 +88,5 @@ public class HomePage {
 
     public String getCartConfirmationMessage(){
         return this.cartConfirmationMessage.getText();
-    }
-
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 }

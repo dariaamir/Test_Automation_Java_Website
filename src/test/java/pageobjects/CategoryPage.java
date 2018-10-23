@@ -11,6 +11,11 @@ import java.util.List;
 public class CategoryPage {
     private WebDriver driver;
 
+    public CategoryPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     @FindBy(className = "login")
     public WebElement signInLink;
 
@@ -42,11 +47,5 @@ public class CategoryPage {
             allCatalogueItems[i] = allProductContainres.get( i ).getAttribute("title");
         }
         return allCatalogueItems;
-    }
-
-
-    public CategoryPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 }

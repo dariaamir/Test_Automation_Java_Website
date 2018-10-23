@@ -1,5 +1,5 @@
 Feature: Catalogue
-   User is able to browse the catalogue
+  User is able to browse the catalogue
 
   Scenario Outline: Browse category and subcategory
     Given user is on Home Page
@@ -13,7 +13,7 @@ Feature: Catalogue
       |Dresses  |Casual Dresses |Printed Dress              |
 
   Scenario Outline: Hover on category
-    Given user is on homepage
+    Given user is on Home Page
     When user hovers over the <category> menu item
     Then user is able to see <subcategory>
 

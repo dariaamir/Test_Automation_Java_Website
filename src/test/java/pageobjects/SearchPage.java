@@ -11,6 +11,11 @@ import java.util.List;
 public class SearchPage {
     private WebDriver driver;
 
+    public SearchPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     @FindBy(className = "page-heading")
     private WebElement pageTitle;
 
@@ -35,10 +40,5 @@ public class SearchPage {
 
     public String geterrorMessageText(){
         return errorMessage.getText();
-    }
-
-    public SearchPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 }

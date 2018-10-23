@@ -9,6 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     private WebDriver driver;
 
+    public LoginPage(WebDriver driver) {
+
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
     public String loginPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 
     public String getDefaultLoginPageURL(){
@@ -46,12 +52,5 @@ public class LoginPage {
 
     public String getErrorLoginMessage(){
         return this.loginErrorMessageText.getText();
-    }
-
-    // init
-    public LoginPage(WebDriver driver) {
-
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 }
