@@ -89,4 +89,5 @@ public class HomePage {
     public String getCartConfirmationMessage(){
         return this.cartConfirmationMessage.getText();
     }
+
 }

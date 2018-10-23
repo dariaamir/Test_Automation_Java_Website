@@ -8,8 +8,7 @@ Feature: WishList
     Given user is logged in
 
   Scenario: Wishlist link at the user page
-    When user is on Home Page
-    And user clicks customer_account link
+    When user is on My Account page
     And user clicks my_wishlists link
     Then my_wishlist page is opened
 

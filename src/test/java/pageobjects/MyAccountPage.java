@@ -1,6 +1,8 @@
 package pageobjects;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
@@ -16,5 +18,16 @@ public class MyAccountPage {
 
     public String getDefaultMyAccountPageURL(){
         return this.myAccountPageURL;
+    }
+
+    public void openMyAccountPage(){
+        driver.get( myAccountPageURL );
+    }
+
+    @FindBy(className = "lnk_wishlist")
+    private WebElement myWishlistsLink;
+
+    public void clickMyWishliststLink(){
+        this.myWishlistsLink.click();
     }
 }

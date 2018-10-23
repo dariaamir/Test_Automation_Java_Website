@@ -80,6 +80,7 @@ public class StepDefinitions {
         Assert.assertEquals(currentConfirmationMessage,"Product successfully added to your shopping cart" );
     }
 
+
     // Login page steps
     @Given("^user is on Login Page$")
     public void user_is_on_login_page() {
@@ -114,10 +115,21 @@ public class StepDefinitions {
     }
 
     // MyAccount Page steps
+
+    @When("^user is on My Account page$")
+    public void user_is_on_my_account_page() {
+        myAccountPage.openMyAccountPage();
+    }
+
     @Then("^user is redirected to the account page$")
     public void account_page_is_opened() {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals( currentUrl, myAccountPage.getDefaultMyAccountPageURL() );
+    }
+
+    @When( "^user clicks my_wishlists link$" )
+    public void user_clicks_my_wishlists_link() {
+        myAccountPage.clickMyWishliststLink();
     }
 
     // Search Page steps
