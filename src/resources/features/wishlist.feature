@@ -10,7 +10,7 @@ Feature: WishList
   Scenario: Wishlist link at the user page
     When user is on My Account page
     And user clicks my_wishlists link
-    Then my_wishlist page is opened
+    Then user is redirected to the my_wishlist page
 
   Scenario: Add item to the wishlist
     When user is on item page
@@ -20,10 +20,10 @@ Feature: WishList
   Scenario: See item in the wishlist
     When user is on my_wishlist page
     And user clicks wishlist title
-    Then item is displayed in the list
+    Then previously added item is displayed in the list
 
   Scenario: Delete item from the wishlist
     When user is on my_wishlist page
     And user clicks wishlist title
-    And user clicks delete button
-    Then item is not displayed in the list
+    And user clicks remove button
+    Then item deleted from the list

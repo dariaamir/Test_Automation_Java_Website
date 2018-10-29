@@ -7,6 +7,7 @@ import pageobjects.LoginPage;
 import pageobjects.MyAccountPage;
 import pageobjects.SearchPage;
 import pageobjects.CategoryPage;
+import pageobjects.MyWishlistPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +25,7 @@ public class StepDefinitions {
     MyAccountPage myAccountPage;
     SearchPage searchPage;
     CategoryPage categoryPage;
+    MyWishlistPage myWishlistPage;
 
     @Before
     public void setUp() {
@@ -35,6 +37,7 @@ public class StepDefinitions {
         myAccountPage = new MyAccountPage( driver );
         searchPage = new SearchPage( driver );
         categoryPage = new CategoryPage( driver );
+        myWishlistPage = new MyWishlistPage( driver );
     }
 
     @After
@@ -168,7 +171,7 @@ public class StepDefinitions {
         categoryPage.openSubbategoryLink( subcategoryTitle );
     }
 
-    @Then("^user is able to see (.*) as item in the catalogue")
+    @Then("^user is able to see (.*) as item in the catalogue$")
     public void catalogue_item_is_displayed(String test_catalogue_item) {
         String[] allCatalogueItems = categoryPage.getAllCatalogueItems();
         Assert.assertTrue( Arrays.asList( allCatalogueItems ).contains( test_catalogue_item ) );
@@ -178,4 +181,47 @@ public class StepDefinitions {
     public void user_is_on_item_page() {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );
     }
+
+    //My Wishlist Page steps
+
+    @Given("^user is on my_wishlist page$")
+    public void user_is_on_my_wishlist_page() {
+        myWishlistPage.openMyWishlistPageURL();
+    }
+
+    @Then("^user is redirected to the my_wishlist page$")
+    public void my_wishlist_page_is_opened() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals( currentUrl, myWishlistPage.getDefaultMyWishlistPageURL() );
+    }
+
+    @When("^user clicks add_to_wlishlist link$")
+    public void user_clicks_add_to_wlishlist_link() {
+        myWishlistPage.addToWishlistButtonClick();
+    }
+
+    @Then("^wishlist confirmation pop-up is displayed$")
+    public void wishlist_confirmation_popup_displayed() {
+        String confirmationPopUpText = "Added to your wishlist.";
+        Assert.assertEquals( confirmationPopUpText ,myWishlistPage.getPopUpMessage() );
+    }
+
+    @When("^user clicks wishlist title$")
+    public void user_clicks_wlishlist_titile() {
+        myWishlistPage.expandMyWhishlistLinkClick();
+    }
+
+    @Then("^previously added item is displayed in the list$")
+    public void item_is_displayed_in_the_list() {
+        Assert.assertTrue(myWishlistPage.productImageDisplayed());
+    }
+
+    @When("^user clicks remove button$")
+    public void user_clicks_remove_button() {
+        myWishlistPage.removeSignClick();
+    }
+
+    @Then("^item deleted from the list$")
+    public void item_deleted_from_the_list() {
+        Assert.assertTrue(myWishlistPage.productImageDisplayed());    }
 }
