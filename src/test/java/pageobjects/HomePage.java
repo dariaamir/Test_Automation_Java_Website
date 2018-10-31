@@ -59,14 +59,6 @@ public class HomePage {
     @FindBy(id = "Product")
     private WebElement popUp;
 
-    @FindBy(name = "Submit")
-    private WebElement popUpAddToCartButton;
-
-    public void clickPopUpAddToCartButton(){
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        this.popUpAddToCartButton.click();
-    }
-
     @FindBy(className = "icon-eye-open")
     private WebElement eyeButton;
 

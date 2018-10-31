@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -47,5 +48,13 @@ public class CategoryPage {
             allCatalogueItems[i] = allProductContainres.get( i ).getAttribute("title");
         }
         return allCatalogueItems;
+    }
+
+    @FindBy(name = "Submit")
+    private WebElement AddToCartButton;
+
+    public void clickAddToCartButton(){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        this.AddToCartButton.click();
     }
 }

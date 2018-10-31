@@ -53,7 +53,7 @@ public class MyWishlistPage {
     private WebElement productImage;
 
     public boolean productImageDisplayed(){
-        return this.productImage.isEnabled();
+        return productImage.isDisplayed();
     }
 
     @FindBy(className = "icon-remove-sign")

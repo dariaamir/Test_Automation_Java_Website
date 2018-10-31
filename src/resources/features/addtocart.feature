@@ -8,10 +8,10 @@ Feature: addToCart
 
   Scenario: Add item to the cart from the main page
     When user is on Home Page
-    And user click on the first add_to_cart button
+    And user click on the first add_to_cart button at the home page
     Then confirmation pop-up is displayed
 
   Scenario: Add item to the cart from item page
     When user is on item page
-    And user clicks add_to_cart button at the pop-up
+    And user clicks add_to_cart button at the item page
     Then confirmation pop-up is displayed

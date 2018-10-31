@@ -67,15 +67,11 @@ public class StepDefinitions {
         homePage.openCategoryMenuLink( categoryTitle );
     }
 
-    @When( "^user click on the first add_to_cart button$" )
+    @When( "^user click on the first add_to_cart button at the home page$" )
     public void user_clicks_add_to_cart_button_from_the_home_page(){
         homePage.clickAddToCartButton();
     }
 
-    @When( "^user clicks add_to_cart button at the pop-up$" )
-    public void user_clicks_add_to_cart_button_from_the_pop_up() {
-        homePage.clickPopUpAddToCartButton();
-    }
     @Then( "^confirmation pop-up is displayed$" )
     public void confirmation_popup_is_displayed(){
         Assert.assertTrue( homePage.getIfCartConfirmationPopUpVisible() );
@@ -182,6 +178,11 @@ public class StepDefinitions {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );
     }
 
+    @When( "^user clicks add_to_cart button at the item page$" )
+    public void user_clicks_add_to_cart_button_from_the_item_page() {
+        categoryPage.clickAddToCartButton();
+    }
+
     //My Wishlist Page steps
 
     @Given("^user is on my_wishlist page$")
@@ -212,7 +213,7 @@ public class StepDefinitions {
     }
 
     @Then("^previously added item is displayed in the list$")
-    public void item_is_displayed_in_the_list() {
+    public void item_is_displayed_in_the_list() throws Exception{
         Assert.assertTrue(myWishlistPage.productImageDisplayed());
     }
 
@@ -221,7 +222,12 @@ public class StepDefinitions {
         myWishlistPage.removeSignClick();
     }
 
+    @When("^user refreshes page$")
+    public void user_refreshes_page() {
+        driver.navigate().refresh();
+    }
+
     @Then("^item deleted from the list$")
-    public void item_deleted_from_the_list() {
-        Assert.assertTrue(myWishlistPage.productImageDisplayed());    }
+    public void item_deleted_from_the_list() throws Exception{
+        Assert.assertFalse(myWishlistPage.productImageDisplayed());}
 }
