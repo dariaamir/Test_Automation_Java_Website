@@ -3,10 +3,10 @@ Feature: Checkout
 
   Scenario: Add item to the cart
     Given user is on item page
-    When user clicks add_to_cart button
+    When user clicks add_to_cart button at the item page
     And user clicks proceed_to_checkout
     Then user is redirected to the checkout page
-    And item is displayed at the page
+    And item is displayed at the checkout page
 
   Scenario: 1st checkout page (Summary)
     Given user is on 1st checkout page

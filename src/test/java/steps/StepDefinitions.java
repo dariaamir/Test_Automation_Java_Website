@@ -8,6 +8,7 @@ import pageobjects.MyAccountPage;
 import pageobjects.SearchPage;
 import pageobjects.CategoryPage;
 import pageobjects.MyWishlistPage;
+import pageobjects.CheckoutPage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,6 +27,7 @@ public class StepDefinitions {
     SearchPage searchPage;
     CategoryPage categoryPage;
     MyWishlistPage myWishlistPage;
+    CheckoutPage checkoutPage;
 
     @Before
     public void setUp() {
@@ -38,6 +40,7 @@ public class StepDefinitions {
         searchPage = new SearchPage( driver );
         categoryPage = new CategoryPage( driver );
         myWishlistPage = new MyWishlistPage( driver );
+        checkoutPage = new CheckoutPage( driver );
     }
 
     @After
@@ -183,6 +186,11 @@ public class StepDefinitions {
         categoryPage.clickAddToCartButton();
     }
 
+    @When( "^user clicks proceed_to_checkout$" )
+    public void user_clicks_proceed_to_checkout() {
+        categoryPage.clickProceedToCheckoutButton();
+    }
+
     //My Wishlist Page steps
 
     @Given("^user is on my_wishlist page$")
@@ -213,7 +221,7 @@ public class StepDefinitions {
     }
 
     @Then("^previously added item is displayed in the list$")
-    public void item_is_displayed_in_the_list() throws Exception{
+    public void item_is_displayed_in_the_list() {
         Assert.assertTrue(myWishlistPage.productImageDisplayed());
     }
 
@@ -230,4 +238,17 @@ public class StepDefinitions {
     @Then("^item deleted from the list$")
     public void item_deleted_from_the_list() throws Exception{
         Assert.assertFalse(myWishlistPage.productImageDisplayed());}
+
+
+    // Checkout Page  Steps
+
+    @Then("^user is redirected to the checkout page$")
+    public void user_is_redirected_to_the_checkout_page() {
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals( currentUrl, checkoutPage.getDefaultCheckoutPageURL() );
+    }
+    @Then("^item is displayed at the checkout page$")
+    public void item_is_displayed_at_the_checkout_page() {
+        Assert.assertTrue(checkoutPage.cartProductDisplayed());
+    }
 }

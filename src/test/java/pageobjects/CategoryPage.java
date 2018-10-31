@@ -57,4 +57,11 @@ public class CategoryPage {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         this.AddToCartButton.click();
     }
+
+    @FindBy(linkText = "Proceed to checkout")
+    private WebElement proceedToCheckoutButton;
+
+    public void clickProceedToCheckoutButton(){
+        this.proceedToCheckoutButton.click();
+    }
 }
