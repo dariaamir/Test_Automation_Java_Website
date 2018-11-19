@@ -242,13 +242,50 @@ public class StepDefinitions {
 
     // Checkout Page  Steps
 
-    @Then("^user is redirected to the checkout page$")
-    public void user_is_redirected_to_the_checkout_page() {
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertEquals( currentUrl, checkoutPage.getDefaultCheckoutPageURL() );
+    @Given("^user is on 1st checkout page$")
+    public void user_is_on_1_checkout_page() {
+       driver.get(checkoutPage.getDefaultCheckoutPage1URL());
     }
+
+    @Then("^user is redirected to the 1st checkout page$")
+    public void user_is_redirected_to_the_1_checkout_page() {
+        String h = checkoutPage.getPageHeader();
+        Assert.assertTrue( checkoutPage.getPageHeader().contains( "SUMMARY" ) );
+    }
+
+    @Then("^user is redirected to the 2nd checkout page$")
+    public void user_is_redirected_to_the_2_checkout_page() {
+        String h = checkoutPage.getPageHeader();
+        Assert.assertTrue( checkoutPage.getPageHeader().contains( "AUTHENTICATION" ) );
+    }
+
+    @Then("^user is redirected to the 3rd checkout page$")
+    public void user_is_redirected_to_the_3_checkout_page() {
+        String h = checkoutPage.getPageHeader();
+        Assert.assertTrue( checkoutPage.getPageHeader().contains( "ADDRESS" ) );
+    }
+
+    @Then("^user is redirected to the 4th checkout page$")
+    public void user_is_redirected_to_the_4_checkout_page() {
+        String h = checkoutPage.getPageHeader();
+        Assert.assertTrue( checkoutPage.getPageHeader().contains( "SHIPPING" ) );
+    }
+
+    @Then("^user is redirected to the 5th checkout page$")
+    public void user_is_redirected_to_the_5_checkout_page() {
+        String h = checkoutPage.getPageHeader();
+        Assert.assertTrue( checkoutPage.getPageHeader().contains( "PAYMENT" ) );
+    }
+
     @Then("^item is displayed at the checkout page$")
     public void item_is_displayed_at_the_checkout_page() {
         Assert.assertTrue(checkoutPage.cartProductDisplayed());
     }
+
+    @Then("^user loggs in from the checkout page$")
+    public void user_loggs_in_from_the_checkout_page() {
+        checkoutPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
+    }
+
+
 }

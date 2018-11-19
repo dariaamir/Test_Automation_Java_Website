@@ -4,9 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 
 public class CheckoutPage {
@@ -17,10 +14,10 @@ public class CheckoutPage {
         PageFactory.initElements(driver, this);
     }
 
-    private String CheckoutPageURL = "http://automationpractice.com/index.php?controller=order";
+    private String CheckoutPage1URL = "http://automationpractice.com/index.php?controller=order";
 
-    public String getDefaultCheckoutPageURL(){
-        return this.CheckoutPageURL;
+    public String getDefaultCheckoutPage1URL(){
+        return this.CheckoutPage1URL;
     }
 
     @FindBy(className = "cart_product")
@@ -30,5 +27,27 @@ public class CheckoutPage {
         return cartProduct.isDisplayed();
     }
 
+
+    @FindBy(className = "page-heading")
+    private WebElement pageHeader;
+
+    public String getPageHeader(){
+        return this.pageHeader.getText();
+    }
+
+    @FindBy(id = "email")
+    private WebElement emailInputField;
+
+    @FindBy(id = "passwd")
+    private WebElement passwordInputField;
+
+    @FindBy(id = "SubmitLogin")
+    private WebElement submitLoginButton;
+
+    public void enterLoginAndPassword(String username, String password){
+        this.emailInputField.sendKeys(username);
+        this.passwordInputField.sendKeys(password);
+        this.submitLoginButton.click();
+    }
 
 }
