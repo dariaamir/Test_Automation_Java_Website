@@ -176,6 +176,16 @@ public class StepDefinitions {
         Assert.assertTrue( Arrays.asList( allCatalogueItems ).contains( test_catalogue_item ) );
     }
 
+    @Then("^user is able to see (.*)")
+    public void  user_is_able_to_see_subcategory (String subcategory){
+        Assert.assertTrue( categoryPage.getIfSubCategoryDropDownVisible(subcategory) );
+     }
+
+    @Then("^user hovers over the (.*) menu item")
+    public void  user_hovers_over_the_category_menu_item (String category){
+        categoryPage.hoverOverCategory(category);
+    }
+
     @Given("^user is on item page$")
     public void user_is_on_item_page() {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );

@@ -4,8 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.interactions.Actions;
 import java.util.List;
 
 
@@ -29,15 +30,47 @@ public class CategoryPage {
     @FindBy(css = ".subcategory-name[title=\"Casual Dresses\"]")
     private WebElement subcategoryCasualDresseslink;
 
+    @FindBy(css = "title=\"Blouses\"")
+    private WebElement subcategoryBlouses;
+
+    @FindBy(xpath = "title=\"Evening Dresses\"")
+    private WebElement subcategoryEveningDresses;
+
     public void openSubbategoryLink(String subcategoryTitle){
+        WebElement subcategory = null;
         switch (subcategoryTitle) {
             case "Tops":
-                subcategoryTopslink.click();
+                subcategory = subcategoryTopslink;
             case "Casual Dresses":
-                subcategoryCasualDresseslink.click();
+                subcategory = subcategoryCasualDresseslink;
         }
+        subcategory.click();
     }
 
+    @FindBy(css = "[title=\"Women\"]")
+    private WebElement categoryWomen;
+
+    public void hoverOverCategory(String categoryTitle){
+        WebElement category = null;
+        switch (categoryTitle) {
+            case "Woman":
+                category = categoryWomen;
+        }
+        Actions action = new Actions(driver);
+        action.moveToElement(category).build().perform();
+    }
+
+
+    public boolean getIfSubCategoryDropDownVisible(String subcategoryTitle){
+        WebElement subcategory = null;
+        switch (subcategoryTitle) {
+            case "Blouses":
+                subcategory = categoryWomen;
+            case "Evening Dresses":
+                subcategory = categoryWomen;
+        }
+        return subcategory.isDisplayed();
+    }
     @FindBy(css = ".product-container .product-name")
     private List<WebElement> allProductContainres;
 
