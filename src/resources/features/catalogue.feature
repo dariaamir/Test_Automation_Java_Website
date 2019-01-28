@@ -9,13 +9,13 @@ Feature: Catalogue
 
     Examples:
       |category |subcategory    |test_catalogue_item        |
-      |Woman    |Tops           |Faded Short Sleeve T-shirts|
+      |Women    |Tops           |Faded Short Sleeve T-shirts|
       |Dresses  |Casual Dresses |Printed Dress              |
 
   Scenario Outline: Hover on category
     Given user is on Home Page
     When user hovers over the <category> menu item
-    Then user is able to see <subcategory>
+    Then user is able to see <subcategory> as subcategory
 
     Examples:
       |category |subcategory        |
@@ -23,13 +23,13 @@ Feature: Catalogue
       |Woman    |Evening Dresses    |
 
 
-  Scenario Outline: Select <size>
-    Given user is on <category> page
-    When user opens selects <size>
-    And user opens first item at the page
-    Then <size> is availabe for purchase
+  Scenario Outline: Select size
+    Given user is at the Women category page
+    And user selects <size> as size
+    And user opens the first item at the category page
+    Then <size> size is availabe for purchase
 
     Examples:
-      |category |size|
-      |Dresses  |s   |
-      |T-shirts |l   |
+      |size|
+      |S   |
+      |L   |

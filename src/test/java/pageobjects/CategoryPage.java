@@ -1,5 +1,6 @@
 package pageobjects;
 
+import jdk.nashorn.internal.objects.annotations.Function;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,10 +25,10 @@ public class CategoryPage {
     @FindBy(className = "search_query")
     public WebElement searchInputField;
 
-    @FindBy(css = ".subcategory-name[title=\"Tops\"]")
+    @FindBy(css = ".subcategory-image [title='Tops']")
     private WebElement subcategoryTopslink;
 
-    @FindBy(css = ".subcategory-name[title=\"Casual Dresses\"]")
+    @FindBy(css = ".subcategory-image [title='Casual Dresses']")
     private WebElement subcategoryCasualDresseslink;
 
     @FindBy(css = "title=\"Blouses\"")
@@ -41,9 +42,13 @@ public class CategoryPage {
         switch (subcategoryTitle) {
             case "Tops":
                 subcategory = subcategoryTopslink;
+                break;
             case "Casual Dresses":
                 subcategory = subcategoryCasualDresseslink;
+                break;
         }
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(subcategory));
         subcategory.click();
     }
 
@@ -83,11 +88,57 @@ public class CategoryPage {
         return allCatalogueItems;
     }
 
+    public String womenCategoryPageURL = "http://automationpractice.com/index.php?id_category=3&controller=category";
+
+    public void openWomenCategoryPage(){
+        driver.get( womenCategoryPageURL );
+    }
+
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_1]")
+    private WebElement sizeCheckboxS;
+
+    @FindBy(xpath = ".checkbox[name=layered_id_attribute_group_2]")
+    private WebElement sizeCheckboxM;
+
+    @FindBy(xpath = ".checkbox[name=layered_id_attribute_group_3]")
+    private WebElement sizeCheckboxL;
+
+    public void clickSizeCheckbox(String sizeLabelString){
+        WebElement sizeLabel = null;
+        switch (sizeLabelString) {
+            case "S":
+                sizeLabel = sizeCheckboxS;
+                break;
+            case "M":
+                sizeLabel = sizeCheckboxM;
+                break;
+            case "L":
+                sizeLabel = sizeCheckboxL;
+                break;
+        }
+        sizeLabel.click();
+    }
+
+    @FindBy(className = "product_img_link")
+    private WebElement firstItemAtThePage;
+
+    public void openFirtsItem(){
+               this.firstItemAtThePage.click();
+    }
+
+    @FindBy(xpath = "select[id='group_1']")
+    private WebElement sizeSelectionDropDown;
+
+    public boolean sizeAvailableForPurchase(String sizeLabel){
+        return true;
+    }
+
     @FindBy(name = "Submit")
     private WebElement AddToCartButton;
 
     public void clickAddToCartButton(){
         WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(AddToCartButton));
         this.AddToCartButton.click();
     }
 

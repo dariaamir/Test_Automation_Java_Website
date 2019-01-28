@@ -176,10 +176,30 @@ public class StepDefinitions {
         Assert.assertTrue( Arrays.asList( allCatalogueItems ).contains( test_catalogue_item ) );
     }
 
-    @Then("^user is able to see (.*)")
+    @Then("^user is able to see (.*) as subcategory")
     public void  user_is_able_to_see_subcategory (String subcategory){
         Assert.assertTrue( categoryPage.getIfSubCategoryDropDownVisible(subcategory) );
      }
+
+    @When("user is at the Women category page")
+    public void user_is_on_women_category_page() {
+        categoryPage.openWomenCategoryPage();
+    }
+
+    @Then("^user selects (.*) as size")
+    public void  user_selects_size(String userSize){
+        categoryPage.clickSizeCheckbox(userSize);
+    }
+
+    @Then("^user opens the first item at the category page")
+    public void  user_opens_first_item_at_the_page(){
+        categoryPage.openFirtsItem();
+    }
+
+    @Then("^(.*) size is availabe for purchase")
+    public void size_is_availabe_for_purchase(String sizeLabel){
+        Assert.assertTrue(categoryPage.sizeAvailableForPurchase(sizeLabel));
+    }
 
     @Then("^user hovers over the (.*) menu item")
     public void  user_hovers_over_the_category_menu_item (String category){

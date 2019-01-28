@@ -1,5 +1,6 @@
 package pageobjects;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import cucumber.api.java.cs.Ale;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
@@ -37,16 +38,23 @@ public class HomePage {
     @FindBy(css = ".sf-with-ul[title=\"Women\"]")
     private WebElement categoryWomenMenuItem;
 
+    //TODO find out why link doesn't work anymore
     @FindBy(css = ".sf-with-ul[title=\"Dresses\"]")
     private WebElement categoryDressesMenuItem;
 
     public void openCategoryMenuLink(String categoryTitle){
+        WebElement categoryItem = null;
         switch (categoryTitle) {
             case "Women":
-                categoryWomenMenuItem.click();
+                categoryItem = categoryWomenMenuItem;
+                break;
             case "Dresses":
-                categoryDressesMenuItem.click();
+                categoryItem = categoryDressesMenuItem;
+                break;
         }
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(categoryItem));
+        categoryItem.click();
     }
 
     @FindBy(className = "ajax_add_to_cart_button")
