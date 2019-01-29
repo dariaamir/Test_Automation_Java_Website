@@ -1,13 +1,15 @@
 package pageobjects;
 
-import jdk.nashorn.internal.objects.annotations.Function;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,10 +99,10 @@ public class CategoryPage {
     @FindBy(css = ".checkbox[name=layered_id_attribute_group_1]")
     private WebElement sizeCheckboxS;
 
-    @FindBy(xpath = ".checkbox[name=layered_id_attribute_group_2]")
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_2]")
     private WebElement sizeCheckboxM;
 
-    @FindBy(xpath = ".checkbox[name=layered_id_attribute_group_3]")
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_3]")
     private WebElement sizeCheckboxL;
 
     public void clickSizeCheckbox(String sizeLabelString){
@@ -126,11 +128,17 @@ public class CategoryPage {
                this.firstItemAtThePage.click();
     }
 
-    @FindBy(xpath = "select[id='group_1']")
-    private WebElement sizeSelectionDropDown;
+    @FindBy(css = "select[id='group_1'] option")
+    private List <WebElement> sizeSelectionDropDown;
+
 
     public boolean sizeAvailableForPurchase(String sizeLabel){
-        return true;
+        List<String> e = new ArrayList<>();
+        for (WebElement el: sizeSelectionDropDown){
+            e.add(el.getText());
+        }
+        if (e.contains(sizeLabel))return true;
+        else return false;
     }
 
     @FindBy(name = "Submit")

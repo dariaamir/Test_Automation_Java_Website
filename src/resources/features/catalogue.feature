@@ -27,7 +27,7 @@ Feature: Catalogue
     Given user is at the Women category page
     And user selects <size> as size
     And user opens the first item at the category page
-    Then <size> size is availabe for purchase
+    Then <size> size is available for purchase
 
     Examples:
       |size|

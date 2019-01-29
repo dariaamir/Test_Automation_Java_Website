@@ -196,8 +196,8 @@ public class StepDefinitions {
         categoryPage.openFirtsItem();
     }
 
-    @Then("^(.*) size is availabe for purchase")
-    public void size_is_availabe_for_purchase(String sizeLabel){
+    @Then("^(.*) size is available for purchase")
+    public void size_is_available_for_purchase(String sizeLabel){
         Assert.assertTrue(categoryPage.sizeAvailableForPurchase(sizeLabel));
     }
 
