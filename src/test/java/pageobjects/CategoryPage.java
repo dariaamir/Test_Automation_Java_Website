@@ -16,10 +16,11 @@ import java.util.List;
 public class CategoryPage {
     private WebDriver driver;
 
+
     public CategoryPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
+        }
 
     @FindBy(className = "login")
     public WebElement signInLink;
@@ -146,14 +147,24 @@ public class CategoryPage {
 
     public void clickAddToCartButton(){
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(AddToCartButton));
+        wait.until(ExpectedConditions.elementToBeClickable(this.AddToCartButton));
         this.AddToCartButton.click();
     }
+    @FindBy(css = "[title='Proceed to checkout']")
+    private WebElement proceedToCheckoutPopUpButton;
 
-    @FindBy(linkText = "Proceed to checkout")
+    public void clickProceedToCheckoutPopUpButton(){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(this.proceedToCheckoutPopUpButton));
+        this.proceedToCheckoutPopUpButton.click();
+    }
+
+    @FindBy(css = ".cart_navigation [title='Proceed to checkout']")
     private WebElement proceedToCheckoutButton;
 
     public void clickProceedToCheckoutButton(){
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeClickable(this.proceedToCheckoutButton));
         this.proceedToCheckoutButton.click();
     }
 }

@@ -210,10 +210,15 @@ public class StepDefinitions {
     public void user_is_on_item_page() {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );
     }
-
     @When( "^user clicks add_to_cart button at the item page$" )
     public void user_clicks_add_to_cart_button_from_the_item_page() {
         categoryPage.clickAddToCartButton();
+    }
+
+    //TODO finish checkout feature when site will be available
+    @When( "^user clicks proceed_to_checkout at the pop-up$" )
+    public void user_clicks_proceed_to_checkout_at_the_pop_up() {
+        categoryPage.clickProceedToCheckoutPopUpButton();
     }
 
     @When( "^user clicks proceed_to_checkout$" )
@@ -265,6 +270,7 @@ public class StepDefinitions {
         driver.navigate().refresh();
     }
 
+    // TODO figure out why it doesn't work
     @Then("^item deleted from the list$")
     public void item_deleted_from_the_list() throws Exception{
         Assert.assertFalse(myWishlistPage.productImageDisplayed());}
@@ -299,6 +305,11 @@ public class StepDefinitions {
     public void user_is_redirected_to_the_4_checkout_page() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "SHIPPING" ) );
+    }
+
+    @Then("^user agrees the terms of service$")
+    public void user_agrees_the_terms_of_service() {
+       checkoutPage.agreeTheTermOfService();
     }
 
     @Then("^user is redirected to the 5th checkout page$")

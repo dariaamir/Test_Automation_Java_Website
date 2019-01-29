@@ -35,6 +35,13 @@ public class CheckoutPage {
         return this.pageHeader.getText();
     }
 
+    @FindBy(id = "cgv")
+    private WebElement termsAndConditionsCheckbox;
+
+    public void agreeTheTermOfService(){
+        termsAndConditionsCheckbox.click();
+    }
+
     @FindBy(id = "email")
     private WebElement emailInputField;
 
