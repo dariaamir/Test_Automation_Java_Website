@@ -63,6 +63,7 @@ public class CategoryPage {
         switch (categoryTitle) {
             case "Woman":
                 category = categoryWomen;
+                break;
         }
         Actions action = new Actions(driver);
         action.moveToElement(category).build().perform();
@@ -74,8 +75,10 @@ public class CategoryPage {
         switch (subcategoryTitle) {
             case "Blouses":
                 subcategory = categoryWomen;
+                break;
             case "Evening Dresses":
                 subcategory = categoryWomen;
+                break;
         }
         return subcategory.isDisplayed();
     }
@@ -91,7 +94,7 @@ public class CategoryPage {
         return allCatalogueItems;
     }
 
-    public String womenCategoryPageURL = "http://automationpractice.com/index.php?id_category=3&controller=category";
+    private String womenCategoryPageURL = "http://automationpractice.com/index.php?id_category=3&controller=category";
 
     public void openWomenCategoryPage(){
         driver.get( womenCategoryPageURL );
@@ -138,8 +141,7 @@ public class CategoryPage {
         for (WebElement el: sizeSelectionDropDown){
             e.add(el.getText());
         }
-        if (e.contains(sizeLabel))return true;
-        else return false;
+        return e.contains(sizeLabel);
     }
 
     @FindBy(name = "Submit")

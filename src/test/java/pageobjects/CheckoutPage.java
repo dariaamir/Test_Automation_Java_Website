@@ -7,17 +7,14 @@ import org.openqa.selenium.support.PageFactory;
 
 
 public class CheckoutPage {
-    private WebDriver driver;
 
     public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    private String CheckoutPage1URL = "http://automationpractice.com/index.php?controller=order";
-
-    public String getDefaultCheckoutPage1URL(){
-        return this.CheckoutPage1URL;
+    public String getDefaultCheckoutPageURL(){
+        String checkoutPageURL = "http://automationpractice.com/index.php?controller=order";
+        return checkoutPageURL;
     }
 
     @FindBy(className = "cart_product")

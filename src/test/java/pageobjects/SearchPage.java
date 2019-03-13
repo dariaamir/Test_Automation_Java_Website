@@ -9,10 +9,8 @@ import java.util.List;
 
 
 public class SearchPage {
-    private WebDriver driver;
 
     public SearchPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -38,7 +36,7 @@ public class SearchPage {
     @FindBy(className = "alert-warning")
     private WebElement errorMessage;
 
-    public String geterrorMessageText(){
+    public String getErrorMessageText(){
         return errorMessage.getText();
     }
 }

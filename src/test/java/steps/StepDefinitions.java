@@ -160,7 +160,7 @@ public class StepDefinitions {
 
     @Then("^(.*) as search page error message is displayed$")
     public void zeroResultsErrorMessageIsDisplayed(String zeroResultsErrorMessage) {
-        String currentErrorMessage = searchPage.geterrorMessageText();
+        String currentErrorMessage = searchPage.getErrorMessageText();
         Assert.assertEquals( currentErrorMessage, zeroResultsErrorMessage );
     }
 
@@ -279,7 +279,7 @@ public class StepDefinitions {
 
     @Given("^user is on 1st checkout page$")
     public void userIsOn1CheckoutPage() {
-       driver.get(checkoutPage.getDefaultCheckoutPage1URL());
+       driver.get(checkoutPage.getDefaultCheckoutPageURL());
     }
 
     @Then("^user is redirected to the 1st checkout page$")
