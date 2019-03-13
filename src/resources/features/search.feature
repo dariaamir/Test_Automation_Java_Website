@@ -6,7 +6,7 @@ Feature: Search Scenario
     Given user is on Home Page
 
   Scenario Outline: Search from the main page
-    When user enters <search_string> as search_string in the search field and clicks enter
+    When user enters <search_string> as search string in the search field and clicks enter
     Then user is redirected to the search result page
     And  <search_string> is displayed at the top
     And <search_results> search results are loaded
@@ -19,7 +19,7 @@ Feature: Search Scenario
       |demo_1        |7 results have been found.    |Faded Short Sleeve T-shirts|
 
   Scenario Outline: Search from the main page
-    When user enters <search_string> as search_string in the search field and clicks enter
+    When user enters <search_string> as search string in the search field and clicks enter
     Then user is redirected to the search result page
     And <zero_search_results> search results are loaded
     And <zero_results_error_message> as search page error message is displayed

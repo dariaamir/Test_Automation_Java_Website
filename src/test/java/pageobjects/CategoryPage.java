@@ -40,7 +40,7 @@ public class CategoryPage {
     @FindBy(xpath = "title=\"Evening Dresses\"")
     private WebElement subcategoryEveningDresses;
 
-    public void openSubbategoryLink(String subcategoryTitle){
+    public void openSubcategoryLink(String subcategoryTitle){
         WebElement subcategory = null;
         switch (subcategoryTitle) {
             case "Tops":

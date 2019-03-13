@@ -50,33 +50,33 @@ public class StepDefinitions {
 
     // Home Page steps
     @Given("^user is on Home Page$")
-    public void user_is_on_home_page() {
+    public void userIsOnHomePage() {
         homePage.openHomePage();
     }
 
     @When("^user opens the Login Page link$")
-    public void user_opens_the_Login_Page_link() {
+    public void userOpensTheLoginPageLink() {
         homePage.clickSignInLink();
     }
 
-    @When("^user enters (.*) as search_string in the search field and clicks enter$")
-    public void user_enters_esarch_string(String search_string) {
-        homePage.searchInputField.sendKeys( search_string );
+    @When("^user enters (.*) as search string in the search field and clicks enter$")
+    public void userEntersSearchString(String searchString) {
+        homePage.searchInputField.sendKeys( searchString );
         homePage.searchInputField.sendKeys( Keys.ENTER );
     }
 
     @When("^user opens (.*) as category page$")
-    public void user_opens_category_page(String categoryTitle) {
+    public void userOpensCategoryPage(String categoryTitle) {
         homePage.openCategoryMenuLink( categoryTitle );
     }
 
     @When( "^user click on the first add_to_cart button at the home page$" )
-    public void user_clicks_add_to_cart_button_from_the_home_page(){
+    public void userClicksAddToCartButtonFromTheHomePage(){
         homePage.clickAddToCartButton();
     }
 
     @Then( "^confirmation pop-up is displayed$" )
-    public void confirmation_popup_is_displayed(){
+    public void confirmationPopupIsDisplayed(){
         Assert.assertTrue( homePage.getIfCartConfirmationPopUpVisible() );
         String currentConfirmationMessage = homePage.getCartConfirmationMessage();
         Assert.assertEquals(currentConfirmationMessage,"Product successfully added to your shopping cart" );
@@ -85,33 +85,33 @@ public class StepDefinitions {
 
     // Login page steps
     @Given("^user is on Login Page$")
-    public void user_is_on_login_page() {
+    public void userIsOnLoginPage() {
         loginPage.openLoginPage();
     }
 
     @Then("^user is redirected to the Login page$")
-    public void login_page_is_opened() {
+    public void loginPageIsOpened() {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals( currentUrl, loginPage.getDefaultLoginPageURL() );
     }
 
     @When("^user enters (.*) as username and (.*) as password$")
-    public void user_enters_username_and_password(String username, String password) {
+    public void userEntersUsernameAndPassword(String username, String password) {
         loginPage.enterLoginAndPassword( username, password );
     }
 
     @Then("^(.*) as success message is displayed$")
-    public void success_message_is_displayed(String message) {
+    public void successMsessageIsDisplayed(String message) {
         Assert.assertEquals( message, loginPage.getSuccessLoginMessage() );
     }
 
     @Then("^(.*) as login page error message is displayed$")
-    public void error_message_is_displayed(String message) {
+    public void errorMessageIsDisplayed(String message) {
         Assert.assertEquals( message, loginPage.getErrorLoginMessage() );
     }
 
     @When( "^user is logged in$"  )
-    public void user_logs_in() {
+    public void userLogsIn() {
         loginPage.openLoginPage();
         loginPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
     }
@@ -119,212 +119,212 @@ public class StepDefinitions {
     // MyAccount Page steps
 
     @When("^user is on My Account page$")
-    public void user_is_on_my_account_page() {
+    public void userIsOnMyAccountPage() {
         myAccountPage.openMyAccountPage();
     }
 
     @Then("^user is redirected to the account page$")
-    public void account_page_is_opened() {
+    public void accountPageIsOpened() {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals( currentUrl, myAccountPage.getDefaultMyAccountPageURL() );
     }
 
     @When( "^user clicks my_wishlists link$" )
-    public void user_clicks_my_wishlists_link() {
+    public void userClicksMyWishlistsLink() {
         myAccountPage.clickMyWishliststLink();
     }
 
     // Search Page steps
     @Then("^user is redirected to the search result page$")
-    public void user_is_redirected_to_the_search_result_page() {
+    public void userIsRedirectedToTheSearchResultPage() {
         Assert.assertEquals( driver.getTitle(), "Search - My Store" );
     }
 
     @Then("^(.*) is displayed at the top$")
-    public void search_string_displayed_at_the_search_page(String search_string) {
+    public void searchStringDisplayedAtTheSearchPage(String searchString) {
         String pageTitle = searchPage.getPageTitle();
-        Assert.assertTrue( pageTitle.contains( search_string.toUpperCase() ) );
+        Assert.assertTrue( pageTitle.contains( searchString.toUpperCase() ) );
     }
 
     @Then("^(.*) search results are loaded$")
-    public void search_results_are_loaded(String search_result) {
+    public void searchResultsAreLoaded(String searchResult) {
         String pageTitle = searchPage.getPageTitle();
-        Assert.assertTrue( pageTitle.contains( search_result ) );
+        Assert.assertTrue( pageTitle.contains( searchResult ) );
     }
 
     @Then("^(.*) as search item is displayed in the results$")
-    public void search_item_is_displayed(String test_search_item) {
+    public void searchItemIsDisplayed(String testSearchItem) {
         String[] allProductsTitles = searchPage.getAllProductContainersTitles();
-        Assert.assertTrue( Arrays.asList( allProductsTitles ).contains( test_search_item ) );
+        Assert.assertTrue( Arrays.asList( allProductsTitles ).contains( testSearchItem ) );
     }
 
     @Then("^(.*) as search page error message is displayed$")
-    public void zero_results_error_message_is_displayed(String zero_results_error_message) {
-        String current_error_message = searchPage.geterrorMessageText();
-        Assert.assertEquals( current_error_message, zero_results_error_message );
+    public void zeroResultsErrorMessageIsDisplayed(String zeroResultsErrorMessage) {
+        String currentErrorMessage = searchPage.geterrorMessageText();
+        Assert.assertEquals( currentErrorMessage, zeroResultsErrorMessage );
     }
 
     // Category Page steps
     @When("^user opens (.*) as subcategory page$")
-    public void user_opens_subcategory_page(String subcategoryTitle) {
-        categoryPage.openSubbategoryLink( subcategoryTitle );
+    public void userOpensSubcategoryPage(String subcategoryTitle) {
+        categoryPage.openSubcategoryLink( subcategoryTitle );
     }
 
     @Then("^user is able to see (.*) as item in the catalogue$")
-    public void catalogue_item_is_displayed(String test_catalogue_item) {
+    public void catalogueItemIsDisplayed(String testCatalogueItem) {
         String[] allCatalogueItems = categoryPage.getAllCatalogueItems();
-        Assert.assertTrue( Arrays.asList( allCatalogueItems ).contains( test_catalogue_item ) );
+        Assert.assertTrue( Arrays.asList( allCatalogueItems ).contains( testCatalogueItem ) );
     }
 
     @Then("^user is able to see (.*) as subcategory")
-    public void  user_is_able_to_see_subcategory (String subcategory){
+    public void  userIsAbleToSeeSubcategory (String subcategory){
         Assert.assertTrue( categoryPage.getIfSubCategoryDropDownVisible(subcategory) );
      }
 
     @When("user is at the Women category page")
-    public void user_is_on_women_category_page() {
+    public void userIsOnWomenCategoryPage() {
         categoryPage.openWomenCategoryPage();
     }
 
     @Then("^user selects (.*) as size")
-    public void  user_selects_size(String userSize){
+    public void  userSelectsSize(String userSize){
         categoryPage.clickSizeCheckbox(userSize);
     }
 
     @Then("^user opens the first item at the category page")
-    public void  user_opens_first_item_at_the_page(){
+    public void  userOpensFirstItemAtThePage(){
         categoryPage.openFirtsItem();
     }
 
     @Then("^(.*) size is available for purchase")
-    public void size_is_available_for_purchase(String sizeLabel){
+    public void sizeIsAvailableForPurchase(String sizeLabel){
         Assert.assertTrue(categoryPage.sizeAvailableForPurchase(sizeLabel));
     }
 
     @Then("^user hovers over the (.*) menu item")
-    public void  user_hovers_over_the_category_menu_item (String category){
+    public void  userHoversOverTheCategoryMenuItem (String category){
         categoryPage.hoverOverCategory(category);
     }
 
     @Given("^user is on item page$")
-    public void user_is_on_item_page() {
+    public void userIsOnItemPage() {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );
     }
     @When( "^user clicks add_to_cart button at the item page$" )
-    public void user_clicks_add_to_cart_button_from_the_item_page() {
+    public void userClicksAddToCartButtonFromTheItemPage() {
         categoryPage.clickAddToCartButton();
     }
 
     //TODO finish checkout feature when site will be available
     @When( "^user clicks proceed_to_checkout at the pop-up$" )
-    public void user_clicks_proceed_to_checkout_at_the_pop_up() {
+    public void userClicksProceedToCheckoutAtThePopUp() {
         categoryPage.clickProceedToCheckoutPopUpButton();
     }
 
     @When( "^user clicks proceed_to_checkout$" )
-    public void user_clicks_proceed_to_checkout() {
+    public void userClicksProceedToCheckout() {
         categoryPage.clickProceedToCheckoutButton();
     }
 
     //My Wishlist Page steps
 
     @Given("^user is on my_wishlist page$")
-    public void user_is_on_my_wishlist_page() {
+    public void userIsOnMyWishlistPage() {
         myWishlistPage.openMyWishlistPageURL();
     }
 
     @Then("^user is redirected to the my_wishlist page$")
-    public void my_wishlist_page_is_opened() {
+    public void myWishlistPageIsOpened() {
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals( currentUrl, myWishlistPage.getDefaultMyWishlistPageURL() );
     }
 
     @When("^user clicks add_to_wlishlist link$")
-    public void user_clicks_add_to_wlishlist_link() {
+    public void userClicksAddToWlishlistLink() {
         myWishlistPage.addToWishlistButtonClick();
     }
 
     @Then("^wishlist confirmation pop-up is displayed$")
-    public void wishlist_confirmation_popup_displayed() {
+    public void wishlistConfirmationPopupDisplayed() {
         String confirmationPopUpText = "Added to your wishlist.";
         Assert.assertEquals( confirmationPopUpText ,myWishlistPage.getPopUpMessage() );
     }
 
     @When("^user clicks wishlist title$")
-    public void user_clicks_wlishlist_titile() {
+    public void userClicksWlishlistTitile() {
         myWishlistPage.expandMyWhishlistLinkClick();
     }
 
     @Then("^previously added item is displayed in the list$")
-    public void item_is_displayed_in_the_list() {
+    public void itemIsDisplayedInTheList() {
         Assert.assertTrue(myWishlistPage.productImageDisplayed());
     }
 
     @When("^user clicks remove button$")
-    public void user_clicks_remove_button() {
+    public void userClicksRemoveButton() {
         myWishlistPage.removeSignClick();
     }
 
     @When("^user refreshes page$")
-    public void user_refreshes_page() {
+    public void userRefreshesPage() {
         driver.navigate().refresh();
     }
 
     // TODO figure out why it doesn't work
     @Then("^item deleted from the list$")
-    public void item_deleted_from_the_list() throws Exception{
+    public void itemDeletedFromTheList() throws Exception{
         Assert.assertFalse(myWishlistPage.productImageDisplayed());}
 
 
     // Checkout Page  Steps
 
     @Given("^user is on 1st checkout page$")
-    public void user_is_on_1_checkout_page() {
+    public void userIsOn1CheckoutPage() {
        driver.get(checkoutPage.getDefaultCheckoutPage1URL());
     }
 
     @Then("^user is redirected to the 1st checkout page$")
-    public void user_is_redirected_to_the_1_checkout_page() {
+    public void userIsRedirectedToThe1CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "SUMMARY" ) );
     }
 
     @Then("^user is redirected to the 2nd checkout page$")
-    public void user_is_redirected_to_the_2_checkout_page() {
+    public void userIsRedirectedToThe2CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "AUTHENTICATION" ) );
     }
 
     @Then("^user is redirected to the 3rd checkout page$")
-    public void user_is_redirected_to_the_3_checkout_page() {
+    public void userIsRedirectedToThe3CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "ADDRESS" ) );
     }
 
     @Then("^user is redirected to the 4th checkout page$")
-    public void user_is_redirected_to_the_4_checkout_page() {
+    public void userIsRedirectedToThe4CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "SHIPPING" ) );
     }
 
     @Then("^user agrees the terms of service$")
-    public void user_agrees_the_terms_of_service() {
+    public void userAgreesTheTermsOfService() {
        checkoutPage.agreeTheTermOfService();
     }
 
     @Then("^user is redirected to the 5th checkout page$")
-    public void user_is_redirected_to_the_5_checkout_page() {
+    public void userIsRedirectedToThe5CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "PAYMENT" ) );
     }
 
     @Then("^item is displayed at the checkout page$")
-    public void item_is_displayed_at_the_checkout_page() {
+    public void itemIsDisplayedAtTheCheckoutPage() {
         Assert.assertTrue(checkoutPage.cartProductDisplayed());
     }
 
     @Then("^user loggs in from the checkout page$")
-    public void user_loggs_in_from_the_checkout_page() {
+    public void userLoggsInFromTheCheckoutPage() {
         checkoutPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
     }
 
