@@ -6,16 +6,16 @@ Feature: Checkout
     When user clicks add_to_cart button at the item page
     And user clicks proceed_to_checkout at the pop-up
     Then user is redirected to the 1st checkout page
-    And item is displayed at the checkout page
-    And user clicks proceed_to_checkout
-    And user is redirected to the 2nd checkout page
-    And user loggs in from the checkout page
-    And user is redirected to the 3rd checkout page
-    And user clicks proceed_to_checkout
-    And user is redirected to the 4th checkout page
-    And user agrees the terms of service
-    And user clicks proceed_to_checkout
-    And user is redirected to the 5th checkout page
-    And user selects payment by whire
-    And user clicks confirmation button
-    And confirmation message is displayed
+    Then item is displayed at the checkout page
+    Then user clicks proceed_to_checkout
+    Then user is redirected to the 2nd checkout page
+    Then user loggs in from the checkout page
+    Then user is redirected to the 3rd checkout page
+    Then user clicks proceed_to_checkout
+    Then user is redirected to the 4th checkout page
+    Then user agrees the terms of service
+    Then user clicks proceed_to_checkout
+    Then user is redirected to the 5th checkout page
+    Then user selects payment by wire
+    Then user clicks confirmation button
+    Then confirmation message is displayed

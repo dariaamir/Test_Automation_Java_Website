@@ -159,7 +159,7 @@ public class CategoryPage {
         this.proceedToCheckoutPopUpButton.click();
     }
 
-    @FindBy(css = ".cart_navigation [title='Proceed to checkout']")
+    @FindBy(css = ".cart_navigation .button")
     private WebElement proceedToCheckoutButton;
 
     public void clickProceedToCheckoutButton(){

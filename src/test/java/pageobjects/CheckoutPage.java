@@ -57,4 +57,18 @@ public class CheckoutPage {
         this.submitLoginButton.click();
     }
 
+    @FindBy(css = ".payment_module .bankwire")
+    private WebElement paymentByWire;
+
+    public void clickPaymentByWire(){
+        this.paymentByWire.click();
+    }
+
+    @FindBy(css = ".cheque-indent .dark")
+    private WebElement confirmationMessage;
+
+    public String getConfirmationMessage(){
+        return this.confirmationMessage.getText();
+    }
+
 }

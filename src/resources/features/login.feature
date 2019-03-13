@@ -25,5 +25,5 @@ Feature: Login
 
     Examples:
       |username                 |password  |error_message|
-      |12334qwer                |  |Invalid email address.|
+      |12334qwer                |          |Invalid email address.|
       |zelenayakoshka@yandex.ru |Qwer1235@ |Authentication failed.|

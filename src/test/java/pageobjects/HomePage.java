@@ -1,8 +1,5 @@
 package pageobjects;
 
-import com.sun.xml.internal.bind.v2.TODO;
-import cucumber.api.java.cs.Ale;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;

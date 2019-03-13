@@ -215,7 +215,6 @@ public class StepDefinitions {
         categoryPage.clickAddToCartButton();
     }
 
-    //TODO finish checkout feature when site will be available
     @When( "^user clicks proceed_to_checkout at the pop-up$" )
     public void userClicksProceedToCheckoutAtThePopUp() {
         categoryPage.clickProceedToCheckoutPopUpButton();
@@ -316,6 +315,22 @@ public class StepDefinitions {
     public void userIsRedirectedToThe5CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "PAYMENT" ) );
+    }
+
+    @Then("^user selects payment by wire$")
+    public void userSelectsPaymentByWire() {
+        checkoutPage.clickPaymentByWire();
+    }
+
+    @Then( "^user clicks confirmation button$" )
+    public void userClicksConfirmationButton() {
+        categoryPage.clickProceedToCheckoutButton();
+    }
+
+    @Then( "^confirmation message is displayed$" )
+    public void confirmationMessageIsDisplayed() {
+        String message = "Your order on My Store is complete.";
+        Assert.assertEquals(message, checkoutPage.getConfirmationMessage());
     }
 
     @Then("^item is displayed at the checkout page$")
