@@ -1,4 +1,5 @@
 # TA_1_Website_Test_Automation
+Website testing
 
 Educational project in website UI test automation
 
