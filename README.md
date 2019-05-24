@@ -2,13 +2,12 @@
 
 Educational project in website UI test automation
 
-Technologies used:
+Website: http://automationpractice.com/index.php
+
+**Technologies used:**
 - Java
 - Maven
 - Cucumber
 
-Patterns:
+**Patterns:**
 - Page object
-
-Website:
-http://automationpractice.com/index.php
