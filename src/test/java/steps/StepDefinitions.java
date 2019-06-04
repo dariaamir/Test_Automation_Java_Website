@@ -256,6 +256,12 @@ public class StepDefinitions {
         myWishlistPage.expandMyWhishlistLinkClick();
     }
 
+    @Given("^user had added item to the wishlist$")
+    public void userHadAddedItemToTheWishlist() {
+        userIsOnItemPage();
+        userClicksAddToWlishlistLink();
+    }
+
     @Then("^previously added item is displayed in the list$")
     public void itemIsDisplayedInTheList() {
         Assert.assertTrue(myWishlistPage.productImageDisplayed());
@@ -271,7 +277,6 @@ public class StepDefinitions {
         driver.navigate().refresh();
     }
 
-    // TODO figure out why it doesn't work
     @Then("^item deleted from the list$")
     public void itemDeletedFromTheList() throws Exception{
        Thread.sleep(7000);
@@ -312,6 +317,7 @@ public class StepDefinitions {
 
 
     @Then("^user is redirected to the 5th checkout page$")
+
     public void userIsRedirectedToThe5CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "PAYMENT" ) );

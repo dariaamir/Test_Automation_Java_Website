@@ -13,8 +13,8 @@ Feature: Search Scenario
     And <test_search_item> as search item is displayed in the results
 
     Examples:
-      |search_string |search_results|test_search_item|
-      |blouse        |1 result has been found.|Blouse|
+      |search_string |search_results                |test_search_item|
+      |blouse        |1 result has been found.      |Blouse|
       |chiffon dress |2 results have been found.    |Printed Summer Dress|
       |demo_1        |7 results have been found.    |Faded Short Sleeve T-shirts|
 
@@ -25,6 +25,6 @@ Feature: Search Scenario
     And <zero_results_error_message> as search page error message is displayed
 
     Examples:
-      |search_string |zero_search_results|zero_results_error_message|
+      |search_string |zero_search_results       |zero_results_error_message|
       |qwer1234      |0 results have been found.|No results were found for your search "qwer1234"|
       |.             |0 results have been found.|No results were found for your search "."|
