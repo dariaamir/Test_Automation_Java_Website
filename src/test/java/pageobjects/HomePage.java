@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class HomePage {
-    public static WebDriver driver;
+    private WebDriver driver;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public String homePageURL = "http://automationpractice.com/index.php";
+    private String homePageURL = "http://automationpractice.com/index.php";
 
     public void openHomePage(){
         driver.get( homePageURL );
@@ -35,7 +35,6 @@ public class HomePage {
     @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Women\"]")
     private WebElement categoryWomenMenuItem;
 
-    //TODO find out why link doesn't work anymore
     @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Dresses\"]")
     private WebElement categoryDressesMenuItem;
 
