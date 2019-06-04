@@ -8,22 +8,24 @@ Feature: Login
     And user opens the Login Page link
     Then user is redirected to the Login page
 
-  Scenario Outline: Login with <username> and <password>
+  Scenario: Login successful
     When user is on Login Page
-    And user enters <username> as username and <password> as password
-    Then <message> as success message is displayed
+    And user enters username and password
+      |username                |password |
+      |zelenayakoshka@yandex.ru|Qwer1234!|
+    Then success message is displayed
+      |message                                                                                  |
+      |Welcome to your account. Here you can manage all of your personal information and orders.|
     And user is redirected to the account page
 
-    Examples:
-      |username|password|message|
-      |zelenayakoshka@yandex.ru|Qwer1234!|Welcome to your account. Here you can manage all of your personal information and orders.|
 
-  Scenario Outline: Login with <username> and <password>
+  Scenario: Login fail
     When user is on Login Page
-    And user enters <username> as username and <password> as password
-    Then <error_message> as login page error message is displayed
-
-    Examples:
-      |username                 |password  |error_message|
-      |12334qwer                |          |Invalid email address.|
-      |zelenayakoshka@yandex.ru |Qwer1235@ |Authentication failed.|
+    And user enters username and password
+      |username                 |password  |
+      |12334qwer                |          |
+      |zelenayakoshka@yandex.ru |Qwer1235@ |
+    Then error message is displayed
+      |error message|
+      |Invalid email address.|
+      |Authentication failed.|

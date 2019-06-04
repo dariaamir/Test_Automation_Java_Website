@@ -46,6 +46,11 @@ public class LoginPage {
         this.submitLoginButton.click();
     }
 
+    public void clearInputFields(){
+        this.emailInputField.clear();
+        this.passwordInputField.clear();
+    }
+
     public String getSuccessLoginMessage(){
         return this.loginSuccessMessageText.getText();
     }
