@@ -50,7 +50,7 @@ public class MyWishlistPage {
     }
 
     @FindBy(className = "product_image")
-    private WebElement productImage;
+    public WebElement productImage;
 
     public boolean productImageDisplayed(){
         return productImage.isDisplayed();

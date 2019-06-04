@@ -2,6 +2,8 @@ package steps;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.HomePage;
 import pageobjects.LoginPage;
 import pageobjects.MyAccountPage;
@@ -272,7 +274,8 @@ public class StepDefinitions {
     // TODO figure out why it doesn't work
     @Then("^item deleted from the list$")
     public void itemDeletedFromTheList() throws Exception{
-        Assert.assertFalse(myWishlistPage.productImageDisplayed());}
+       Thread.sleep(7000);
+       Assert.assertFalse(myWishlistPage.productImageDisplayed());}
 
 
     // Checkout Page  Steps
@@ -284,25 +287,21 @@ public class StepDefinitions {
 
     @Then("^user is redirected to the 1st checkout page$")
     public void userIsRedirectedToThe1CheckoutPage() {
-        String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "SUMMARY" ) );
     }
 
     @Then("^user is redirected to the 2nd checkout page$")
     public void userIsRedirectedToThe2CheckoutPage() {
-        String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "AUTHENTICATION" ) );
     }
 
     @Then("^user is redirected to the 3rd checkout page$")
     public void userIsRedirectedToThe3CheckoutPage() {
-        String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "ADDRESS" ) );
     }
 
     @Then("^user is redirected to the 4th checkout page$")
     public void userIsRedirectedToThe4CheckoutPage() {
-        String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains( "SHIPPING" ) );
     }
 
@@ -310,6 +309,7 @@ public class StepDefinitions {
     public void userAgreesTheTermsOfService() {
        checkoutPage.agreeTheTermOfService();
     }
+
 
     @Then("^user is redirected to the 5th checkout page$")
     public void userIsRedirectedToThe5CheckoutPage() {

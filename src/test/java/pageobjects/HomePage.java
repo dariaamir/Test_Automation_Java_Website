@@ -32,11 +32,11 @@ public class HomePage {
     @FindBy(className = "search_query")
     public WebElement searchInputField;
 
-    @FindBy(css = ".sf-with-ul[title=\"Women\"]")
+    @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Women\"]")
     private WebElement categoryWomenMenuItem;
 
     //TODO find out why link doesn't work anymore
-    @FindBy(css = ".sf-with-ul[title=\"Dresses\"]")
+    @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Dresses\"]")
     private WebElement categoryDressesMenuItem;
 
     public void openCategoryMenuLink(String categoryTitle){
