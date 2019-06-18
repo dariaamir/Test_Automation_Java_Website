@@ -19,13 +19,40 @@ Feature: Login
     And user is redirected to the account page
 
 
-  Scenario: Login fail
+  Scenario Outline: Login fail
     When user is on Login Page
-    And user enters username and password
+    And user enters credentials
       |username                 |password  |
-      |12334qwer                |          |
-      |zelenayakoshka@yandex.ru |Qwer1235@ |
+      |<username>|<password>          |
     Then error message is displayed
       |error message|
-      |Invalid email address.|
-      |Authentication failed.|
+      |<error_message>|
+
+    Examples:
+    |username                 | password | error_message        |
+    |12334qwer                |          |Invalid email address.|
+    |zelenayakoshka@yandex.ru |Qwer1235@ |Authentication failed.|
+
+
+    Scenario: asdas
+      Given logged it
+      And on page X
+      When I enter stuff in field X
+
+      When I enter stuff in field X1
+      When I enter stuff in field X2
+      When I enter stuff in field X
+
+
+
+
+
+
+
+
+
+
+
+
+
+      When I enter stuff in field X
