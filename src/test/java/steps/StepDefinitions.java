@@ -1,7 +1,11 @@
 package steps;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.HomePage;
@@ -97,19 +101,33 @@ public class StepDefinitions {
         Assert.assertEquals( currentUrl, loginPage.getDefaultLoginPageURL() );
     }
 
-    @When("^user enters (.*) as username and (.*) as password$")
-    public void userEntersUsernameAndPassword(String username, String password) {
-        loginPage.enterLoginAndPassword( username, password );
+    @And("^user enters username and password$")
+    public void userEntersUsernameAndPassword(DataTable dataTable) {
+        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
+        for(int i=0; i<dataList.size(); i++) {
+            String username = dataList.get(i).get("username");
+            String password = dataList.get(i).get("password");
+            loginPage.enterLoginAndPassword(username, password);
+        }
     }
 
-    @Then("^(.*) as success message is displayed$")
-    public void successMsessageIsDisplayed(String message) {
-        Assert.assertEquals( message, loginPage.getSuccessLoginMessage() );
+    @Then("^success message is displayed$")
+    public void successMsessageIsDisplayed(DataTable dataTable) {
+        List<List<String>> dataList = dataTable.asLists(String.class);
+        for(int i=1; i<dataList.size(); i++) {
+            String message = dataList.get(i).get(0);
+            Assert.assertEquals( message, loginPage.getSuccessLoginMessage() );
+        }
     }
 
-    @Then("^(.*) as login page error message is displayed$")
-    public void errorMessageIsDisplayed(String message) {
-        Assert.assertEquals( message, loginPage.getErrorLoginMessage() );
+    @Then("^error message is displayed$")
+    public void errorMessageIsDisplayed(DataTable dataTable) {
+        List<List<String>> dataList = dataTable.asLists(String.class);
+        for (int i = 1; i < dataList.size(); i++) {
+            String message = dataList.get(i).get(0);
+            Assert.assertEquals(message, loginPage.getErrorLoginMessage());
+            loginPage.clearInputFields();
+        }
     }
 
     @When( "^user is logged in$"  )
