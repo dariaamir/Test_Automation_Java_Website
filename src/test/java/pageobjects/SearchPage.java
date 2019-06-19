@@ -17,12 +17,15 @@ public class SearchPage {
     @FindBy(className = "page-heading")
     private WebElement pageTitle;
 
+    @FindBy(css = ".product-container .product-name")
+    private List<WebElement> allProductContainres;
+
+    @FindBy(className = "alert-warning")
+    private WebElement errorMessage;
+
     public String getPageTitle(){
         return pageTitle.getText();
     }
-
-    @FindBy(css = ".product-container .product-name")
-    private List<WebElement> allProductContainres;
 
     public String[] getAllProductContainersTitles(){
         int listSize = allProductContainres.size();
@@ -32,9 +35,6 @@ public class SearchPage {
         }
         return allProductsTitles;
     }
-
-    @FindBy(className = "alert-warning")
-    private WebElement errorMessage;
 
     public String getErrorMessageText(){
         return errorMessage.getText();

@@ -20,6 +20,21 @@ public class MyWishlistPage {
 
     private String MyWishlistPageURL = "http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist";
 
+    @FindBy(id = "wishlist_button")
+    private WebElement addToWishlistButton;
+
+    @FindBy(className = "fancybox-error")
+    private WebElement popUp;
+
+    @FindBy(linkText = "My wishlist")
+    private WebElement expandMyWhishlistLink;
+
+    @FindBy(className = "product_image")
+    private WebElement productImage;
+
+    @FindBy(className = "icon-remove-sign")
+    private WebElement removeSign;
+
     public String getDefaultMyWishlistPageURL(){
         return this.MyWishlistPageURL;
     }
@@ -28,36 +43,21 @@ public class MyWishlistPage {
         driver.get( MyWishlistPageURL );
     }
 
-    @FindBy(id = "wishlist_button")
-    private WebElement addToWishlistButton;
-
     public void addToWishlistButtonClick(){
         this.addToWishlistButton.click();
     }
-
-    @FindBy(className = "fancybox-error")
-    private WebElement popUp;
 
     public String getPopUpMessage(){
         return this.popUp.getText();
     }
 
-    @FindBy(linkText = "My wishlist")
-    private WebElement expandMyWhishlistLink;
-
     public void expandMyWhishlistLinkClick(){
         this.expandMyWhishlistLink.click();
     }
 
-    @FindBy(className = "product_image")
-    public WebElement productImage;
-
     public boolean productImageDisplayed(){
         return productImage.isDisplayed();
     }
-
-    @FindBy(className = "icon-remove-sign")
-    private WebElement removeSign;
 
     public void removeSignClick(){
         this.removeSign.click();

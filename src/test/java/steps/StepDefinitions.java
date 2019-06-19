@@ -101,7 +101,7 @@ public class StepDefinitions {
         Assert.assertEquals( currentUrl, loginPage.getDefaultLoginPageURL() );
     }
 
-    @And("^user enters username and password$")
+    @And("^user enters credentials$")
     public void userEntersUsernameAndPassword(DataTable dataTable) {
         List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
         for(int i=0; i<dataList.size(); i++) {

@@ -32,27 +32,3 @@ Feature: Login
     |username                 | password | error_message        |
     |12334qwer                |          |Invalid email address.|
     |zelenayakoshka@yandex.ru |Qwer1235@ |Authentication failed.|
-
-
-    Scenario: asdas
-      Given logged it
-      And on page X
-      When I enter stuff in field X
-
-      When I enter stuff in field X1
-      When I enter stuff in field X2
-      When I enter stuff in field X
-
-
-
-
-
-
-
-
-
-
-
-
-
-      When I enter stuff in field X

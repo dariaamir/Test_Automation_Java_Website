@@ -17,14 +17,6 @@ public class LoginPage {
 
     public String loginPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 
-    public String getDefaultLoginPageURL(){
-        return this.loginPageURL;
-    }
-
-    public void openLoginPage(){
-        driver.get( loginPageURL );
-    }
-
     @FindBy(id = "email")
     private WebElement emailInputField;
 
@@ -39,6 +31,14 @@ public class LoginPage {
 
     @FindBy(css = ".alert-danger ol")
     private WebElement loginErrorMessageText;
+
+    public String getDefaultLoginPageURL(){
+        return this.loginPageURL;
+    }
+
+    public void openLoginPage(){
+        driver.get( loginPageURL );
+    }
 
     public void enterLoginAndPassword(String username, String password){
         this.emailInputField.sendKeys(username);

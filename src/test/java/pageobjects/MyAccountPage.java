@@ -16,6 +16,9 @@ public class MyAccountPage {
 
     private String myAccountPageURL = "http://automationpractice.com/index.php?controller=my-account";
 
+    @FindBy(className = "lnk_wishlist")
+    private WebElement myWishlistsLink;
+
     public String getDefaultMyAccountPageURL(){
         return this.myAccountPageURL;
     }
@@ -23,9 +26,6 @@ public class MyAccountPage {
     public void openMyAccountPage(){
         driver.get( myAccountPageURL );
     }
-
-    @FindBy(className = "lnk_wishlist")
-    private WebElement myWishlistsLink;
 
     public void clickMyWishliststLink(){
         this.myWishlistsLink.click();

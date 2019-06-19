@@ -3,7 +3,6 @@ package pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +20,8 @@ public class CategoryPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         }
+
+    private String womenCategoryPageURL = "http://automationpractice.com/index.php?id_category=3&controller=category";
 
     @FindBy(className = "login")
     public WebElement signInLink;
@@ -40,6 +41,37 @@ public class CategoryPage {
     @FindBy(xpath = "title=\"Evening Dresses\"")
     private WebElement subcategoryEveningDresses;
 
+    @FindBy(css = "[title=\"Women\"]")
+    private WebElement categoryWomen;
+
+    @FindBy(css = ".product-container .product-name")
+    private List<WebElement> allProductContainres;
+
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_1]")
+    private WebElement sizeCheckboxS;
+
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_2]")
+    private WebElement sizeCheckboxM;
+
+    @FindBy(css = ".checkbox[name=layered_id_attribute_group_3]")
+    private WebElement sizeCheckboxL;
+
+    @FindBy(className = "product_img_link")
+    private WebElement firstItemAtThePage;
+
+    @FindBy(css = "select[id='group_1'] option")
+    private List <WebElement> sizeSelectionDropDown;
+
+    @FindBy(name = "Submit")
+    private WebElement AddToCartButton;
+
+    @FindBy(css = "[title='Proceed to checkout']")
+    private WebElement proceedToCheckoutPopUpButton;
+
+    @FindBy(css = ".cart_navigation .button")
+    private WebElement proceedToCheckoutButton;
+
+
     public void openSubcategoryLink(String subcategoryTitle){
         WebElement subcategory = null;
         switch (subcategoryTitle) {
@@ -55,9 +87,6 @@ public class CategoryPage {
         subcategory.click();
     }
 
-    @FindBy(css = "[title=\"Women\"]")
-    private WebElement categoryWomen;
-
     public void hoverOverCategory(String categoryTitle){
         WebElement category = null;
         switch (categoryTitle) {
@@ -68,7 +97,6 @@ public class CategoryPage {
         Actions action = new Actions(driver);
         action.moveToElement(category).build().perform();
     }
-
 
     public boolean getIfSubCategoryDropDownVisible(String subcategoryTitle){
         WebElement subcategory = null;
@@ -82,8 +110,6 @@ public class CategoryPage {
         }
         return subcategory.isDisplayed();
     }
-    @FindBy(css = ".product-container .product-name")
-    private List<WebElement> allProductContainres;
 
     public String[] getAllCatalogueItems(){
         int listSize = allProductContainres.size();
@@ -94,20 +120,9 @@ public class CategoryPage {
         return allCatalogueItems;
     }
 
-    private String womenCategoryPageURL = "http://automationpractice.com/index.php?id_category=3&controller=category";
-
     public void openWomenCategoryPage(){
         driver.get( womenCategoryPageURL );
     }
-
-    @FindBy(css = ".checkbox[name=layered_id_attribute_group_1]")
-    private WebElement sizeCheckboxS;
-
-    @FindBy(css = ".checkbox[name=layered_id_attribute_group_2]")
-    private WebElement sizeCheckboxM;
-
-    @FindBy(css = ".checkbox[name=layered_id_attribute_group_3]")
-    private WebElement sizeCheckboxL;
 
     public void clickSizeCheckbox(String sizeLabelString){
         WebElement sizeLabel = null;
@@ -125,16 +140,9 @@ public class CategoryPage {
         sizeLabel.click();
     }
 
-    @FindBy(className = "product_img_link")
-    private WebElement firstItemAtThePage;
-
     public void openFirtsItem(){
                this.firstItemAtThePage.click();
     }
-
-    @FindBy(css = "select[id='group_1'] option")
-    private List <WebElement> sizeSelectionDropDown;
-
 
     public boolean sizeAvailableForPurchase(String sizeLabel){
         List<String> e = new ArrayList<>();
@@ -144,25 +152,17 @@ public class CategoryPage {
         return e.contains(sizeLabel);
     }
 
-    @FindBy(name = "Submit")
-    private WebElement AddToCartButton;
-
     public void clickAddToCartButton(){
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(this.AddToCartButton));
         this.AddToCartButton.click();
     }
-    @FindBy(css = "[title='Proceed to checkout']")
-    private WebElement proceedToCheckoutPopUpButton;
 
     public void clickProceedToCheckoutPopUpButton(){
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(this.proceedToCheckoutPopUpButton));
         this.proceedToCheckoutPopUpButton.click();
     }
-
-    @FindBy(css = ".cart_navigation .button")
-    private WebElement proceedToCheckoutButton;
 
     public void clickProceedToCheckoutButton(){
         WebDriverWait wait = new WebDriverWait(driver, 15);

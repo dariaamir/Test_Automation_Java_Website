@@ -18,25 +18,40 @@ public class HomePage {
 
     private String homePageURL = "http://automationpractice.com/index.php";
 
-    public void openHomePage(){
-        driver.get( homePageURL );
-    }
+    @FindBy(className = "search_query")
+    public WebElement searchInputField;
 
     @FindBy(className = "login")
     private WebElement signInLink;
-
-    public void clickSignInLink(){
-        this.signInLink.click();
-    }
-
-    @FindBy(className = "search_query")
-    public WebElement searchInputField;
 
     @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Women\"]")
     private WebElement categoryWomenMenuItem;
 
     @FindBy(xpath = "//ul[contains(@class, \"menu-content\")]/li/a[text() = \"Dresses\"]")
     private WebElement categoryDressesMenuItem;
+
+    @FindBy(className = "ajax_add_to_cart_button")
+    private WebElement addToCartButton;
+
+    @FindBy(id = "Product")
+    private WebElement popUp;
+
+    @FindBy(className = "icon-eye-open")
+    private WebElement eyeButton;
+
+    @FindBy(id = "layer_cart")
+    private WebElement cartConfirmationPopUp;
+
+    @FindBy(css = ".layer_cart_product h2")
+    private WebElement cartConfirmationMessage;
+
+    public void openHomePage(){
+        driver.get( homePageURL );
+    }
+
+    public void clickSignInLink(){
+        this.signInLink.click();
+    }
 
     public void openCategoryMenuLink(String categoryTitle){
         WebElement categoryItem = null;
@@ -53,34 +68,19 @@ public class HomePage {
         categoryItem.click();
     }
 
-    @FindBy(className = "ajax_add_to_cart_button")
-    private WebElement addToCartButton;
-
     public void clickAddToCartButton(){
         this.addToCartButton.click();
     }
 
-    @FindBy(id = "Product")
-    private WebElement popUp;
-
-    @FindBy(className = "icon-eye-open")
-    private WebElement eyeButton;
-
     public void clickEyeButton(){
         this.eyeButton.click();
     }
-
-    @FindBy(id = "layer_cart")
-    private WebElement cartConfirmationPopUp;
 
     public boolean getIfCartConfirmationPopUpVisible(){
         WebDriverWait wait = new WebDriverWait(driver, 15);
         this.cartConfirmationPopUp = wait.until(ExpectedConditions.visibilityOf(this.cartConfirmationPopUp));
         return this.cartConfirmationPopUp.isDisplayed();
     }
-
-    @FindBy(css = ".layer_cart_product h2")
-    private WebElement cartConfirmationMessage;
 
     public String getCartConfirmationMessage(){
         return this.cartConfirmationMessage.getText();
