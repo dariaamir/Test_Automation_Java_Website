@@ -65,9 +65,13 @@ public class StepDefinitions {
         homePage.clickSignInLink();
     }
 
-    @When("^user enters (.*) as search string in the search field and clicks enter$")
+    @When("^user enters (.*) as search string in the search field$")
     public void userEntersSearchString(String searchString) {
         homePage.searchInputField.sendKeys( searchString );
+    }
+
+    @And("^user clicks Enter$")
+    public void userClicksEnter() {
         homePage.searchInputField.sendKeys( Keys.ENTER );
     }
 

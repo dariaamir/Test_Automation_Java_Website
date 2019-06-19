@@ -1,7 +1,7 @@
 Feature: Login
   - User is able to open the Login Page
-  - User is able to Login with correct username and password
-  - User is not able to Login with wrong username or password
+  - User is able to Login with correct credentials
+  - User is not able to Login with wrong credentials
 
   Scenario: Open the Login page from the Home Page
     When user is on Home Page
@@ -10,7 +10,7 @@ Feature: Login
 
   Scenario: Login successful
     When user is on Login Page
-    And user enters username and password
+    And user enters credentials
       |username                |password |
       |zelenayakoshka@yandex.ru|Qwer1234!|
     Then success message is displayed

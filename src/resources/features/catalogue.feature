@@ -1,7 +1,7 @@
 Feature: Catalogue
   User is able to browse the catalogue
 
-  Scenario Outline: Browse category and subcategory
+  Scenario Outline: Browse category/subcategory
     Given user is on Home Page
     When user opens <category> as category page
     And user opens <subcategory> as subcategory page
