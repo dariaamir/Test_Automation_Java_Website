@@ -8,22 +8,25 @@ Feature: Login
     And user opens the Login Page link
     Then user is redirected to the Login page
 
-  Scenario: Login successful
+  Scenario Outline: Login successful
     When user is on Login Page
     And user enters credentials
-      |username                |password |
-      |zelenayakoshka@yandex.ru|Qwer1234!|
+      |username  |password  |
+      |<username>|<password>|
     Then success message is displayed
-      |message                                                                                  |
-      |Welcome to your account. Here you can manage all of your personal information and orders.|
+      |success message  |
+      |<success_message>|
     And user is redirected to the account page
 
+    Examples:
+      |username                |password |success_message                                                                          |
+      |zelenayakoshka@yandex.ru|Qwer1234!|Welcome to your account. Here you can manage all of your personal information and orders.|
 
   Scenario Outline: Login fail
     When user is on Login Page
     And user enters credentials
-      |username                 |password  |
-      |<username>|<password>          |
+      |username  |password  |
+      |<username>|<password>|
     Then error message is displayed
       |error message|
       |<error_message>|

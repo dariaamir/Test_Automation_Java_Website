@@ -6,12 +6,14 @@ Feature: Search Scenario
     Given user is on Home Page
 
   Scenario Outline: Search from the main page
-    When user enters <search_string> as search string in the search field
+    When user enters search string in the search field
+      |search string  |
+      |<search_string>|
     And user clicks Enter
     Then user is redirected to the search result page
-    And  <search_string> is displayed at the top
-    And <search_results> search results are loaded
-    And <test_search_item> as search item is displayed in the results
+    And search results are displayed at the search page
+      |search string  |search results  |test search item|
+      ||<search_results>|<test_search_item>|
 
     Examples:
       |search_string |search_results                |test_search_item|
@@ -19,7 +21,7 @@ Feature: Search Scenario
       |chiffon dress |2 results have been found.    |Printed Summer Dress|
       |demo_1        |7 results have been found.    |Faded Short Sleeve T-shirts|
 
-  Scenario Outline: Search from the main page
+  Scenario Outline: Search from the main page with 0 results
     When user enters <search_string> as search string in the search field
     And user clicks Enter
     Then user is redirected to the search result page

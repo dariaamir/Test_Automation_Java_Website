@@ -3,9 +3,15 @@ Feature: Catalogue
 
   Scenario Outline: Browse category/subcategory
     Given user is on Home Page
-    When user opens <category> as category page
-    And user opens <subcategory> as subcategory page
-    Then user is able to see <test_catalogue_item> as item in the catalogue
+    When user opens category page
+      |category  |
+      |<category>|
+    And user opens subcategory page
+      |subcategory  |
+      |<subcategory>|
+    Then user is able to see test item in the catalogue
+      |test_catalogue_item  |
+      |<test_catalogue_item>|
 
     Examples:
       |category |subcategory    |test_catalogue_item        |
@@ -14,8 +20,12 @@ Feature: Catalogue
 
   Scenario Outline: Hover on category
     Given user is on Home Page
-    When user hovers over the <category> menu item
-    Then user is able to see <subcategory> as subcategory
+    When user hovers over the category menu item
+      |category  |
+      |<category>|
+    Then user is able to see subcategory
+      |subcategory  |
+      |<subcategory>|
 
     Examples:
       |category |subcategory        |
@@ -25,9 +35,13 @@ Feature: Catalogue
 
   Scenario Outline: Select size
     Given user is at the Women category page
-    And user selects <size> as size
+    And user selects size
+      |size  |
+      |<size>|
     And user opens the first item at the category page
-    Then <size> size is available for purchase
+    Then size is available for purchase
+      |size  |
+      |<size>|
 
     Examples:
       |size|
