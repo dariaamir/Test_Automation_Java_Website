@@ -266,8 +266,9 @@ public class StepDefinitions {
     public void userIsOnItemPage() {
         driver.get( "http://automationpractice.com/index.php?id_product=1&controller=product" );
     }
-    @When( "^user clicks add_to_cart button at the item page$" )
-    public void userClicksAddToCartButtonFromTheItemPage() {
+    @When( "^user adds an item in the cart$" )
+    public void userAddsAnItemInTheCart() {
+        userIsOnItemPage();
         categoryPage.clickAddToCartButton();
     }
 
@@ -276,7 +277,7 @@ public class StepDefinitions {
         categoryPage.clickProceedToCheckoutPopUpButton();
     }
 
-    @When( "^user clicks proceed_to_checkout$" )
+    @When( "^user clicks proceed to checkout$" )
     public void userClicksProceedToCheckout() {
         categoryPage.clickProceedToCheckoutButton();
     }
@@ -337,7 +338,7 @@ public class StepDefinitions {
        Assert.assertFalse(myWishlistPage.productImageDisplayed());}
 
 
-    // Checkout Page  Steps
+    // Checkout Page Steps
 
     @Given("^user is on 1st checkout page$")
     public void userIsOn1CheckoutPage() {
@@ -346,22 +347,24 @@ public class StepDefinitions {
 
     @Then("^user is redirected to the 1st checkout page$")
     public void userIsRedirectedToThe1CheckoutPage() {
-        Assert.assertTrue( checkoutPage.getPageHeader().contains( "SUMMARY" ) );
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, checkoutPage.getDefaultCheckoutPageURL());
+        Assert.assertTrue(checkoutPage.getPageHeader().contains("SUMMARY"));
     }
 
     @Then("^user is redirected to the 2nd checkout page$")
     public void userIsRedirectedToThe2CheckoutPage() {
-        Assert.assertTrue( checkoutPage.getPageHeader().contains( "AUTHENTICATION" ) );
+        Assert.assertTrue(checkoutPage.getPageHeader().contains("AUTHENTICATION"));
     }
 
     @Then("^user is redirected to the 3rd checkout page$")
     public void userIsRedirectedToThe3CheckoutPage() {
-        Assert.assertTrue( checkoutPage.getPageHeader().contains( "ADDRESS" ) );
+        Assert.assertTrue( checkoutPage.getPageHeader().contains("ADDRESS") );
     }
 
     @Then("^user is redirected to the 4th checkout page$")
     public void userIsRedirectedToThe4CheckoutPage() {
-        Assert.assertTrue( checkoutPage.getPageHeader().contains( "SHIPPING" ) );
+        Assert.assertTrue( checkoutPage.getPageHeader().contains("SHIPPING") );
     }
 
     @Then("^user agrees the terms of service$")
@@ -374,7 +377,7 @@ public class StepDefinitions {
 
     public void userIsRedirectedToThe5CheckoutPage() {
         String h = checkoutPage.getPageHeader();
-        Assert.assertTrue( checkoutPage.getPageHeader().contains( "PAYMENT" ) );
+        Assert.assertTrue( checkoutPage.getPageHeader().contains("PAYMENT") );
     }
 
     @Then("^user selects payment by wire$")
@@ -387,8 +390,8 @@ public class StepDefinitions {
         categoryPage.clickProceedToCheckoutButton();
     }
 
-    @Then( "^confirmation message is displayed$" )
-    public void confirmationMessageIsDisplayed() {
+    @Then( "^purchase is completed$" )
+    public void purchaseIsCompleted() {
         String message = "Your order on My Store is complete.";
         Assert.assertEquals(message, checkoutPage.getConfirmationMessage());
     }
