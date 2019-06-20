@@ -67,8 +67,8 @@ public class StepDefinitions {
 
     @When("^user enters search string in the search field$")
     public void userEntersSearchString(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String searchString = dataList.get(0).get("search string");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String searchString = dataMap.get("search string");
         homePage.searchInputField.sendKeys(searchString);
     }
 
@@ -79,8 +79,8 @@ public class StepDefinitions {
 
     @When("^user opens category page$")
     public void userOpensCategoryPage(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String categoryTitle = dataList.get(0).get("category");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String categoryTitle = dataMap.get("category");
         homePage.openCategoryMenuLink(categoryTitle);
     }
 
@@ -111,28 +111,28 @@ public class StepDefinitions {
 
     @And("^user enters credentials$")
     public void userEntersCredentials(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String username = dataList.get(0).get("username");
-        String password = dataList.get(0).get("password");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String username = dataMap.get("username");
+        String password = dataMap.get("password");
         loginPage.enterLoginAndPassword(username, password);
     }
 
     @Then("^success message is displayed$")
     public void successMsessageIsDisplayed(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String message = dataList.get(0).get("success message");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String message = dataMap.get("success message");
         Assert.assertEquals( message, loginPage.getSuccessLoginMessage() );
     }
 
     @Then("^error message is displayed$")
     public void errorMessageIsDisplayed(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String message = dataList.get(0).get("error message");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String message = dataMap.get("error message");
         Assert.assertEquals(message, loginPage.getErrorLoginMessage());
         loginPage.clearInputFields();
     }
 
-    @When( "^user is logged in$"  )
+    @When("^user is logged in$")
     public void userLogsIn() {
         loginPage.openLoginPage();
         loginPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
@@ -164,10 +164,10 @@ public class StepDefinitions {
 
     @Then("^search results are displayed at the search page$")
     public void searchResultsAreDisplayedAtTheSearchPage(DataTable dataTable) {
-        Map<String, String> dataList = dataTable.asMaps(String.class, String.class).get(0);
-        String searchString = dataList.get("search string");
-        String searchResult = dataList.get("search results");
-        String testSearchItem = dataList.get("test search item");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String searchString = dataMap.get("search string");
+        String searchResult = dataMap.get("search results");
+        String testSearchItem = dataMap.get("test search item");
 
         String pageTitle = searchPage.getPageTitle();
         Assert.assertTrue(pageTitle.contains(searchString.toUpperCase()));
@@ -184,10 +184,16 @@ public class StepDefinitions {
         Assert.assertTrue( pageTitle.contains( searchString.toUpperCase() ) );
     }
 
-    @Then("^(.*) search results are loaded$")
-    public void searchResultsAreLoaded(String searchResult) {
+    @Then("^zero search results are displayed at the search page$")
+    public void zeroSearchResultsAreDisplayedAtTheSearchPage(DataTable dataTable) {
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String searchResult = dataMap.get("zero search result");
+        String zeroResultsErrorMessage = dataMap.get("zero results error message");
         String pageTitle = searchPage.getPageTitle();
-        Assert.assertTrue( pageTitle.contains( searchResult ) );
+        Assert.assertTrue(pageTitle.contains(searchResult));
+
+        String currentErrorMessage = searchPage.getErrorMessageText();
+        Assert.assertEquals(currentErrorMessage, zeroResultsErrorMessage);
     }
 
     @Then("^(.*) as search item is displayed in the results$")
@@ -205,23 +211,23 @@ public class StepDefinitions {
     // Category Page steps
     @When("^user opens subcategory page$")
     public void userOpensSubcategoryPage(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String subcategoryTitle = dataList.get(0).get("subcategory");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String subcategoryTitle = dataMap.get("subcategory");
         categoryPage.openSubcategoryLink(subcategoryTitle);
     }
 
     @Then("^user is able to see test item in the catalogue$")
     public void catalogueItemIsDisplayed(DataTable dataTable) {
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String testCatalogueItem = dataList.get(0).get("test_catalogue_item");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String testCatalogueItem = dataMap.get("test_catalogue_item");
         String[] allCatalogueItems = categoryPage.getAllCatalogueItems();
         Assert.assertTrue(Arrays.asList(allCatalogueItems).contains(testCatalogueItem));
     }
 
     @Then("^user is able to see subcategory")
     public void  userIsAbleToSeeSubcategory (DataTable dataTable){
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String subcategory = dataList.get(0).get("subcategory");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String subcategory = dataMap.get("subcategory");
         Assert.assertTrue( categoryPage.getIfSubCategoryDropDownVisible(subcategory) );
      }
 
@@ -232,8 +238,8 @@ public class StepDefinitions {
 
     @Then("^user selects size")
     public void  userSelectsSize(DataTable dataTable){
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String userSize = dataList.get(0).get("size");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String userSize = dataMap.get("size");
         categoryPage.clickSizeCheckbox(userSize);
     }
 
@@ -244,15 +250,15 @@ public class StepDefinitions {
 
     @Then("^size is available for purchase")
     public void sizeIsAvailableForPurchase(DataTable dataTable){
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String sizeLabel = dataList.get(0).get("size");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String sizeLabel = dataMap.get("size");
         Assert.assertTrue(categoryPage.sizeAvailableForPurchase(sizeLabel));
     }
 
     @Then("^user hovers over the category menu item")
     public void  userHoversOverTheCategoryMenuItem (DataTable dataTable){
-        List<Map<String, String>> dataList = dataTable.asMaps(String.class, String.class);
-        String category = dataList.get(0).get("category");
+        Map<String, String> dataMap = dataTable.asMap(String.class, String.class);
+        String category = dataMap.get("category");
         categoryPage.hoverOverCategory(category);
     }
 

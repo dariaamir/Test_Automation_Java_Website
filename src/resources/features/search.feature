@@ -7,13 +7,13 @@ Feature: Search Scenario
 
   Scenario Outline: Search from the main page
     When user enters search string in the search field
-      |search string  |
-      |<search_string>|
+      |search string  |<search_string>|
     And user clicks Enter
     Then user is redirected to the search result page
     And search results are displayed at the search page
-      |search string  |search results  |test search item|
-      ||<search_results>|<test_search_item>|
+      |search string   |<search_string>|
+      |search results  |<search_results>|
+      |test search item|<test_search_item>|
 
     Examples:
       |search_string |search_results                |test_search_item|
@@ -22,13 +22,16 @@ Feature: Search Scenario
       |demo_1        |7 results have been found.    |Faded Short Sleeve T-shirts|
 
   Scenario Outline: Search from the main page with 0 results
-    When user enters <search_string> as search string in the search field
+    When user enters search string in the search field
+      |search string|<search_string>|
     And user clicks Enter
     Then user is redirected to the search result page
-    And <zero_search_results> search results are loaded
-    And <zero_results_error_message> as search page error message is displayed
+    And zero search results are displayed at the search page
+      |zero search result        |<zero_search_result>        |
+      |zero results error message|<zero_results_error_message>|
+
 
     Examples:
-      |search_string |zero_search_results       |zero_results_error_message|
+      |search_string |zero_search_result        |zero_results_error_message                      |
       |qwer1234      |0 results have been found.|No results were found for your search "qwer1234"|
-      |.             |0 results have been found.|No results were found for your search "."|
+      |.             |0 results have been found.|No results were found for your search "."       |

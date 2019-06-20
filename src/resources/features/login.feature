@@ -11,11 +11,10 @@ Feature: Login
   Scenario Outline: Login successful
     When user is on Login Page
     And user enters credentials
-      |username  |password  |
-      |<username>|<password>|
+      |username|<username>|
+      |password|<password>|
     Then success message is displayed
-      |success message  |
-      |<success_message>|
+      |success message |<success_message>|
     And user is redirected to the account page
 
     Examples:
@@ -25,11 +24,10 @@ Feature: Login
   Scenario Outline: Login fail
     When user is on Login Page
     And user enters credentials
-      |username  |password  |
-      |<username>|<password>|
+      |username|<username>|
+      |password|<password>|
     Then error message is displayed
-      |error message|
-      |<error_message>|
+      |error message|<error_message>|
 
     Examples:
     |username                 | password | error_message        |
