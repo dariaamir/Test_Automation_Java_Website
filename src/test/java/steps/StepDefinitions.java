@@ -272,7 +272,7 @@ public class StepDefinitions {
         categoryPage.clickAddToCartButton();
     }
 
-    @When( "^user clicks proceed_to_checkout at the pop-up$" )
+    @When( "^user clicks proceed to checkout at the pop-up$" )
     public void userClicksProceedToCheckoutAtThePopUp() {
         categoryPage.clickProceedToCheckoutPopUpButton();
     }
@@ -340,9 +340,11 @@ public class StepDefinitions {
 
     // Checkout Page Steps
 
-    @Given("^user is on 1st checkout page$")
+    @Given("^user is at the 1st checkout page$")
     public void userIsOn1CheckoutPage() {
-       driver.get(checkoutPage.getDefaultCheckoutPageURL());
+        userIsOnItemPage();
+        categoryPage.clickAddToCartButton();
+        categoryPage.clickProceedToCheckoutPopUpButton();;
     }
 
     @Then("^user is redirected to the 1st checkout page$")
@@ -352,14 +354,42 @@ public class StepDefinitions {
         Assert.assertTrue(checkoutPage.getPageHeader().contains("SUMMARY"));
     }
 
+    @Given("^user is at the 2nd checkout page$")
+    public void userIsOn2CheckoutPage() {
+        userIsOnItemPage();
+        categoryPage.clickAddToCartButton();
+        categoryPage.clickProceedToCheckoutPopUpButton();
+        categoryPage.clickProceedToCheckoutButton();
+    }
+
     @Then("^user is redirected to the 2nd checkout page$")
     public void userIsRedirectedToThe2CheckoutPage() {
         Assert.assertTrue(checkoutPage.getPageHeader().contains("AUTHENTICATION"));
     }
 
+    @Given("^user is at the 3rd checkout page$")
+    public void userIsOn3CheckoutPage() {
+        userIsOnItemPage();
+        categoryPage.clickAddToCartButton();
+        categoryPage.clickProceedToCheckoutPopUpButton();
+        categoryPage.clickProceedToCheckoutButton();
+        checkoutPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
+        categoryPage.clickProceedToCheckoutButton();
+    }
+
     @Then("^user is redirected to the 3rd checkout page$")
     public void userIsRedirectedToThe3CheckoutPage() {
         Assert.assertTrue( checkoutPage.getPageHeader().contains("ADDRESS") );
+    }
+
+    @Given("^user is at the 4th checkout page$")
+    public void userIsOn4CheckoutPage() {
+        userIsOnItemPage();
+        categoryPage.clickAddToCartButton();
+        categoryPage.clickProceedToCheckoutPopUpButton();
+        categoryPage.clickProceedToCheckoutButton();
+        checkoutPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
+        categoryPage.clickProceedToCheckoutButton();
     }
 
     @Then("^user is redirected to the 4th checkout page$")
@@ -378,6 +408,20 @@ public class StepDefinitions {
     public void userIsRedirectedToThe5CheckoutPage() {
         String h = checkoutPage.getPageHeader();
         Assert.assertTrue( checkoutPage.getPageHeader().contains("PAYMENT") );
+    }
+
+    @Given("^user clicks through all checkout pages$")
+    public void userClicksThroughAllCheckoutPages() {
+        userIsOnItemPage();
+        categoryPage.clickAddToCartButton();
+        categoryPage.clickProceedToCheckoutPopUpButton();
+        categoryPage.clickProceedToCheckoutButton();
+        checkoutPage.enterLoginAndPassword( "zelenayakoshka@yandex.ru", "Qwer1234!" );
+        categoryPage.clickProceedToCheckoutButton();
+        checkoutPage.agreeTheTermOfService();
+        categoryPage.clickProceedToCheckoutButton();
+        checkoutPage.clickPaymentByWire();
+        categoryPage.clickProceedToCheckoutButton();
     }
 
     @Then("^user selects payment by wire$")
