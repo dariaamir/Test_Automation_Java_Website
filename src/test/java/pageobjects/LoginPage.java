@@ -15,7 +15,7 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    public String loginPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+    private String loginPageURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
 
     @FindBy(id = "email")
     private WebElement emailInputField;
@@ -37,7 +37,7 @@ public class LoginPage {
     }
 
     public void openLoginPage(){
-        driver.get( loginPageURL );
+        driver.get(loginPageURL);
     }
 
     public void enterLoginAndPassword(String username, String password){

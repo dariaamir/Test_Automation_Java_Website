@@ -14,7 +14,7 @@ Feature: Checkout
 
   Scenario: 3rd checkout page
     Given user is at the 2nd checkout page
-    When user loggs in from the checkout page
+    When user logs in from the checkout page
     Then user is redirected to the 3rd checkout page
 
   Scenario: 4th checkout page

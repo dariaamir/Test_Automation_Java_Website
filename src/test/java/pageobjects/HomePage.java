@@ -46,7 +46,7 @@ public class HomePage {
     private WebElement cartConfirmationMessage;
 
     public void openHomePage(){
-        driver.get( homePageURL );
+        driver.get(homePageURL);
     }
 
     public void clickSignInLink(){

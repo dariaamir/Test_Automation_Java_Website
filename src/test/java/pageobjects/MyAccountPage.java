@@ -24,7 +24,7 @@ public class MyAccountPage {
     }
 
     public void openMyAccountPage(){
-        driver.get( myAccountPageURL );
+        driver.get(myAccountPageURL);
     }
 
     public void clickMyWishliststLink(){

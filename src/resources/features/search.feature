@@ -26,7 +26,7 @@ Feature: Search Scenario
       |search string|<search_string>|
     And user clicks Enter
     Then user is redirected to the search result page
-    And zero search results are displayed at the search page
+    And zero results are displayed at the search page
       |zero search result        |<zero_search_result>        |
       |zero results error message|<zero_results_error_message>|
 

@@ -13,5 +13,5 @@ Feature: addToCart
 
   Scenario: Add item to the cart from item page
     When user is on item page
-    And user clicks add_to_cart button at the item page
+    And user clicks add to cart button at the item page
     Then confirmation pop-up is displayed

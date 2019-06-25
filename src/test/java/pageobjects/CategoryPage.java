@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,13 +114,13 @@ public class CategoryPage {
         int listSize = allProductContainres.size();
         String[] allCatalogueItems = new String[listSize];
         for (int i = 0; i< listSize; i++){
-            allCatalogueItems[i] = allProductContainres.get( i ).getAttribute("title");
+            allCatalogueItems[i] = allProductContainres.get(i).getAttribute("title");
         }
         return allCatalogueItems;
     }
 
     public void openWomenCategoryPage(){
-        driver.get( womenCategoryPageURL );
+        driver.get(womenCategoryPageURL);
     }
 
     public void clickSizeCheckbox(String sizeLabelString){
