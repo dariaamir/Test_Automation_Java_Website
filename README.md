@@ -1,4 +1,4 @@
-# TA_1_Java_Website_Test_Automation
+# Test_Automation_Java_Webservice
 
 Educational project in website UI test automation
 
